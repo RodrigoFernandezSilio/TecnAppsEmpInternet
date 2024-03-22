@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Serie {
 
+    private int id;
+
     private String nombre;
 
     private String sinopsis;
@@ -15,12 +17,21 @@ public class Serie {
 
     private List<Temporada> temporadas;
 
-    public Serie(String nombre, String sinopsis) {
+    public Serie(int id, String nombre, String sinopsis, List<String> creadores, List<String> actores) {
+        this.id = id;
         this.nombre = nombre;
         this.sinopsis = sinopsis;
-        this.creadores = new ArrayList<>();
-        this.actores = new ArrayList<>();
+        this.creadores = creadores;
+        this.actores = actores;
         this.temporadas = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

@@ -13,7 +13,7 @@ public class Usuario {
     private List<Serie> seriesEmpezadas;
     private List<Serie> seriesTerminadas;
 
-    private List<Capitulo> capitulosVistos;
+    private List<CapituloVisto> capitulosVistos;
 
     private List<Factura> facturas;
 
@@ -67,11 +67,11 @@ public class Usuario {
         this.seriesTerminadas = seriesTerminadas;
     }
 
-    public List<Capitulo> getCapitulosVistos() {
+    public List<CapituloVisto> getCapitulosVistos() {
         return capitulosVistos;
     }
 
-    public void setCapitulosVistos(List<Capitulo> capitulosVistos) {
+    public void setCapitulosVistos(List<CapituloVisto> capitulosVistos) {
         this.capitulosVistos = capitulosVistos;
     }
 
