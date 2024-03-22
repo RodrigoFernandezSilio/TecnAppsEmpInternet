@@ -1,52 +1,29 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
-public class Capitulo {
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+public class Capitulo implements Comparable<Capitulo> {
     
     private String titulo;
 
     private String descripcion;
 
-    private int numCapitulo;
+    private final int numCapitulo;
 
     private Temporada temporada;
 
-    public Capitulo(String titulo, String descripcion, int numCapitulo, Temporada temporada) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.numCapitulo = numCapitulo;
-        this.temporada = temporada;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getNumCapitulo() {
-        return numCapitulo;
-    }
-
-    public void setNumCapitulo(int numCapitulo) {
-        this.numCapitulo = numCapitulo;
-    }
-
-    public Temporada getTemporada() {
-        return temporada;
-    }
-
-    public void setTemporada(Temporada temporada) {
-        this.temporada = temporada;
+    @Override
+    public int compareTo(Capitulo otroCapitulo) {
+        return Integer.compare(this.numCapitulo, otroCapitulo.numCapitulo);
     }
 }
 
