@@ -29,6 +29,8 @@ public class Usuario {
 
     private List<CapituloVisto> capitulosVistos;
 
+    private List<CapituloVisto> ultimosCapitulosVistos;
+
     private List<Factura> facturas;
 
 
@@ -53,8 +55,27 @@ public class Usuario {
         
         // Crear una nueva entrada de CapituloVisto
         CapituloVisto nuevoCapituloVisto = new CapituloVisto(serie, temporada.getNumTemporada(), capitulo.getNumCapitulo());
-        // Agregar la nueva entrada a la lista de capítulos vistos del usuario
+        // Agregar la nueva entrada a la lista de capitulos vistos del usuario
         capitulosVistos.add(nuevoCapituloVisto);
+
+        boolean existeCapituloVistoMismaSerie = false;
+        for (CapituloVisto c : ultimosCapitulosVistos) {
+            if (c.getSerie().equals(serie)) {
+                existeCapituloVistoMismaSerie = true;
+                // Verificar si el capitulo reproducido es posterior al ultimo capitulo visto
+                if (c.getNumTemporada() > temporada.getNumTemporada() || 
+                (c.getNumTemporada() == temporada.getNumTemporada() && c.getNumCapitulo() > capitulo.getNumCapitulo())) {
+                    ultimosCapitulosVistos.remove(c);
+                    ultimosCapitulosVistos.add(nuevoCapituloVisto);
+                }
+                break;
+            }
+        }
+        // Verificar si no se encontro ningun capitulo de la misma serie en la lista
+        if (!existeCapituloVistoMismaSerie) {
+            // Agregar el nuevo capitulo a la lista de ultimos capitulos vistos
+            ultimosCapitulosVistos.add(nuevoCapituloVisto);
+        }
 
         // Verificar si la serie a la que pertenece el capitulo esta en pendientes
         if (seriesPendientes.contains(serie)) {
