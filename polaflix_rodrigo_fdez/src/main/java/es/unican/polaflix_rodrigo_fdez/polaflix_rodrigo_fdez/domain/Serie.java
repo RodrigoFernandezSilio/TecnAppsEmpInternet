@@ -25,6 +25,9 @@ public class Serie {
     private String sinopsis;
 
     @NonNull
+    private CategoriaSerie categoriaSerie;
+
+    @NonNull
     private List<String> creadores;
 
     @NonNull

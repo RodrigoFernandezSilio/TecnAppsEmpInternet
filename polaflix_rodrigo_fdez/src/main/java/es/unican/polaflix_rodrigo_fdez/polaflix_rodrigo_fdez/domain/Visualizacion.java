@@ -1,24 +1,25 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
-import java.util.List;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Factura {
+public class Visualizacion {
 
-    private final int anho;
+    private final Date fecha;
 
-    private final int mes;
+    private final float precio;
 
-    private List<Visualizacion> visualizaciones;
+    private final Serie serie;
 
+    private final int numTemporada;
+
+    private final int numCapitulo;    
 }
