@@ -2,6 +2,7 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Entity
 public class Serie {
 
     private final int id;
