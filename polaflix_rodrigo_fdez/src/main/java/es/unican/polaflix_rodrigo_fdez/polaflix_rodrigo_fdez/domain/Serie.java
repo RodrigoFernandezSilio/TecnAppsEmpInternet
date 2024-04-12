@@ -3,6 +3,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -18,7 +21,9 @@ import lombok.ToString;
 @Entity
 public class Serie {
 
-    private final int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private final long id;
 
     @NonNull
     private String nombre;

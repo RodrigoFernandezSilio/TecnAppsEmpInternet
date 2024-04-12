@@ -3,24 +3,35 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
 @Entity
 public class Temporada implements Comparable<Temporada> {
 
-    private final int numTemporada;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private final long id;
 
+    @NonNull
+    private final Integer numTemporada;
+
+    @NonNull
     private Serie serie;
 
+    @NonNull
     private List<Capitulo> capitulos;
 
     @Override

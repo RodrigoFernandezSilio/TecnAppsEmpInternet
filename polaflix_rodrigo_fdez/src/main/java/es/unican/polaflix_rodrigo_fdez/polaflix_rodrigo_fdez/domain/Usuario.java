@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +22,7 @@ import lombok.ToString;
 @Entity
 public class Usuario {
 
+    @Id
     private String nombreUsuario;
 
     private String contrasenha;
