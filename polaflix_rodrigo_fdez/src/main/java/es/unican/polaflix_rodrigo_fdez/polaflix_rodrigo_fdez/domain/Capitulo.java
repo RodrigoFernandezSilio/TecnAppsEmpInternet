@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,6 +34,7 @@ public class Capitulo implements Comparable<Capitulo> {
     private final Integer numCapitulo;
 
     @NonNull
+    @ManyToOne
     private Temporada temporada;
 
     @Override

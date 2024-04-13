@@ -8,6 +8,8 @@ import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,14 +29,22 @@ public class Usuario {
 
     private String contrasenha;
 
+    @ManyToMany
     private Set<Serie> seriesPendientes;
+
+    @ManyToMany
     private Set<Serie> seriesEmpezadas;
+
+    @ManyToMany
     private Set<Serie> seriesTerminadas;
 
+    @OneToMany
     private List<CapituloVisto> capitulosVistos;
 
+    @OneToMany
     private List<CapituloVisto> ultimosCapitulosVistos;
 
+    @OneToMany
     private List<Factura> facturas;
 
 

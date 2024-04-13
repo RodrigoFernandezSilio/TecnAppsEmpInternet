@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -32,6 +34,7 @@ public class Serie {
     private String sinopsis;
 
     @NonNull
+    @ManyToOne
     private CategoriaSerie categoriaSerie;
 
     @NonNull
@@ -41,5 +44,6 @@ public class Serie {
     private List<String> actores;
 
     @NonNull
+    @OneToMany(mappedBy = "serie")
     private List<Temporada> temporadas;
 }

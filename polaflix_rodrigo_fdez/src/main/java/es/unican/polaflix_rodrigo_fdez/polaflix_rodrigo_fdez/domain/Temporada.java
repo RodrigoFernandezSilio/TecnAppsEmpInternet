@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,9 +31,11 @@ public class Temporada implements Comparable<Temporada> {
     private final Integer numTemporada;
 
     @NonNull
+    @ManyToOne
     private Serie serie;
 
     @NonNull
+    @OneToMany(mappedBy = "temporada")
     private List<Capitulo> capitulos;
 
     @Override
