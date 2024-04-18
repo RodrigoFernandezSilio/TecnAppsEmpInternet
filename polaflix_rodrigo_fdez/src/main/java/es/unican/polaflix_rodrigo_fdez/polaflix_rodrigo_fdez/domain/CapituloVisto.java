@@ -1,25 +1,37 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
-import jakarta.persistence.Embeddable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Embeddable
+@Entity
 public class CapituloVisto {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+    
+    @NonNull
     @ManyToOne
     private Serie serie;
 
-    private int numTemporada;
+    @NonNull
+    private Integer numTemporada;
 
-    private int numCapitulo;
+    @NonNull
+    private Integer numCapitulo;
 }

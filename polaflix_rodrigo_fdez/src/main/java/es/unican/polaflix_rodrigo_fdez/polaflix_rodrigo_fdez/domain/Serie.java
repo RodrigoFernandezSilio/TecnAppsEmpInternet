@@ -2,6 +2,7 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -39,9 +40,11 @@ public class Serie {
     private CategoriaSerie categoriaSerie;
 
     @NonNull
+    @ElementCollection
     private List<String> creadores;
 
     @NonNull
+    @ElementCollection
     private List<String> actores;
 
     @NonNull
