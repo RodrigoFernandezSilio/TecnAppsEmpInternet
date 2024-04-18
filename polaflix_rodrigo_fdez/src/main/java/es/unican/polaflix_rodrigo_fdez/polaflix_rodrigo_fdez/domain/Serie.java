@@ -26,7 +26,7 @@ public class Serie {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private final long id;
+    private long id;
 
     @NonNull
     private String nombre;
