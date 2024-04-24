@@ -25,7 +25,7 @@ public class Temporada implements Comparable<Temporada> {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private final long id;
+    private long id;
 
     @NonNull
     private final Integer numTemporada;
