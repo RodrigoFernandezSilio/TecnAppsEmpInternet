@@ -2,6 +2,7 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +12,7 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Capitulo;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.CategoriaSerie;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Serie;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Temporada;
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Usuario;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.SerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.UsuarioRepository;
 
@@ -31,10 +33,19 @@ public class AppFeeder implements CommandLineRunner {
 	}
 
 	private void feedUsuarios() {
-		/*Usuario u1 = new Usuario("Paco", "paco@carSharing.es");
-		Usuario u2 = new Usuario("Lola", "lola@carSharing.es");
+		Usuario u1 = new Usuario("usuario1", "contrasenha1", 
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+		Usuario u2 = new Usuario("usuario2", "contrasenha2",
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+		Usuario u3 = new Usuario("usuario3", "contrasenha3",
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+
 		ur.save(u1);
-		ur.save(u2);*/
+		ur.save(u2);
+		ur.save(u3);
 	}
 
 	private void feedSeries() {
