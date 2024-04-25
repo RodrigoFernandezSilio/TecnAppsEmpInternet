@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -29,7 +31,7 @@ public class Temporada implements Comparable<Temporada> {
     private long id;
 
     @NonNull
-    private final Integer numTemporada;
+    private Integer numTemporada;
 
     @NonNull
     @ManyToOne

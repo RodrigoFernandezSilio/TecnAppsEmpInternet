@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -31,7 +33,7 @@ public class Capitulo implements Comparable<Capitulo> {
     private String descripcion;
 
     @NonNull
-    private final Integer numCapitulo;
+    private Integer numCapitulo;
 
     @NonNull
     @ManyToOne

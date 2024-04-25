@@ -9,11 +9,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -25,18 +27,18 @@ public class Visualizacion {
     private long id;
 
     @NonNull
-    private final Date fecha;
+    private Date fecha;
 
     @NonNull
-    private final Float precio;
+    private Float precio;
 
     @NonNull
     @ManyToOne
-    private final Serie serie;
+    private Serie serie;
 
     @NonNull
-    private final Integer numTemporada;
+    private Integer numTemporada;
 
     @NonNull
-    private final Integer numCapitulo;    
+    private Integer numCapitulo;    
 }
