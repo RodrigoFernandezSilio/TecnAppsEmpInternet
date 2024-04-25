@@ -69,6 +69,27 @@ public class Usuario {
     public void anotarCapituloComoReproducido(Capitulo capitulo) {
         Temporada temporada = capitulo.getTemporada();
         Serie serie = temporada.getSerie();
+
+        // Verifica si la serie no esta en pedientes, ni en empezadas ni en terminadas
+        if (seriesPendientes.contains(serie) && seriesEmpezadas.contains(serie) && seriesTerminadas.contains(serie)) {
+            // Si la serie no esta en pedientes, ni en empezadas ni en terminadas se termina el metodo
+            return;
+        }
+
+        // Verificar si la serie a la que pertenece el capitulo esta en pendientes
+        if (seriesPendientes.contains(serie)) {
+            // Si la serie esta en pendientes, se pasa a la lista de empezadas
+            seriesPendientes.remove(serie);
+            seriesEmpezadas.add(serie);
+        }
+
+        // Verificar si el capitulo es el ultimo de la serie
+        if (serie.getTemporadas().size() - 1 == temporada.getNumTemporada()) {
+            if (temporada.getCapitulos().size() - 1 == capitulo.getNumCapitulo()) {
+                seriesEmpezadas.remove(serie);
+                seriesTerminadas.add(serie);
+            }
+        }
         
         // Crear una nueva entrada de CapituloVisto
         CapituloVisto nuevoCapituloVisto = new CapituloVisto(serie, temporada.getNumTemporada(), capitulo.getNumCapitulo());
@@ -92,21 +113,6 @@ public class Usuario {
         if (!existeCapituloVistoMismaSerie) {
             // Agregar el nuevo capitulo a la lista de ultimos capitulos vistos
             ultimosCapitulosVistos.add(nuevoCapituloVisto);
-        }
-
-        // Verificar si la serie a la que pertenece el capitulo esta en pendientes
-        if (seriesPendientes.contains(serie)) {
-            // Si la serie esta en pendientes, se pasa a la lista de empezadas
-            seriesPendientes.remove(serie);
-            seriesEmpezadas.add(serie);
-        }
-
-        // Verificar si el capitulo es el ultimo de la serie
-        if (serie.getTemporadas().size() - 1 == temporada.getNumTemporada()) {
-            if (temporada.getCapitulos().size() - 1 == capitulo.getNumCapitulo()) {
-                seriesEmpezadas.remove(serie);
-                seriesTerminadas.add(serie);
-            }
         }
 
         Date fechaActual = Calendar.getInstance().getTime();
