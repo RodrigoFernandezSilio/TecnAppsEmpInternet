@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -40,13 +41,13 @@ public class Usuario {
     @ManyToMany
     private Set<Serie> seriesTerminadas;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CapituloVisto> capitulosVistos;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CapituloVisto> ultimosCapitulosVistos;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Factura> facturas;
 
 

@@ -2,6 +2,7 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,6 +36,6 @@ public class Factura {
     private Integer mes;
 
     @NonNull
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Visualizacion> visualizaciones;
 }
