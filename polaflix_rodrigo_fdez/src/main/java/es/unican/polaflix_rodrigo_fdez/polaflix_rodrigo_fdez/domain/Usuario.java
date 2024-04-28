@@ -84,8 +84,8 @@ public class Usuario {
         }
 
         // Verificar si el capitulo es el ultimo de la serie
-        if (serie.getTemporadas().size() - 1 == temporada.getNumTemporada()) {
-            if (temporada.getCapitulos().size() - 1 == capitulo.getNumCapitulo()) {
+        if (serie.getTemporadas().size() == temporada.getNumTemporada()) {
+            if (temporada.getCapitulos().size() == capitulo.getNumCapitulo()) {
                 seriesEmpezadas.remove(serie);
                 seriesTerminadas.add(serie);
             }
