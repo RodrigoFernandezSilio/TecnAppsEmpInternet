@@ -7,6 +7,7 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Capitulo;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.CategoriaSerie;
@@ -25,9 +26,12 @@ public class AppFeeder implements CommandLineRunner {
 	protected SerieRepository sr;
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		feedUsuarios();
 		feedSeries();
+		addSeriesToPersonalSpace();
+		markChapterAsPlayed();
 
 		System.out.println("Application feeded");
 	}
@@ -119,4 +123,39 @@ public class AppFeeder implements CommandLineRunner {
 		sr.save(s3);
 	}
 
+	private void addSeriesToPersonalSpace() {
+		Usuario u1 = ur.findById("usuario1").get();
+		
+		Serie s1 = sr.findByNombre("Los Serrano");
+		Serie s2 = sr.findByNombre("Breaking Bad");
+		Serie s3 = sr.findByNombre("Juego de Tronos");
+
+		u1.agregarSerieEspacioPersonal(s1);
+		u1.agregarSerieEspacioPersonal(s2);
+		u1.agregarSerieEspacioPersonal(s3);
+	}
+
+	private void markChapterAsPlayed() {
+		Usuario u1 = ur.findById("usuario1").get();
+		Serie s1 = sr.findByNombre("Los Serrano");
+		Serie s2 = sr.findByNombre("Breaking Bad");
+
+		Temporada t11 = s1.getTemporadas().get(0); // Primera temporada de Los Serrano
+		Capitulo c111 = t11.getCapitulos().get(0); // Primer capitulo de la primera temporada
+		Capitulo c112 = t11.getCapitulos().get(1); // Segundo capitulo de la primera temporada
+
+
+		Temporada t22 = s2.getTemporadas().get(1); // Segunda temorada de Breaking Bad
+		Capitulo c222 = t22.getCapitulos().get(1); // Segundo capitulo de la segunda temporada (ultimo capitulo de la serie)
+
+		// Para comprobar que al ver un capitulo de una serie esta pasa a empezadas
+		// y para comprobar que en ultimosCapitulosVisto" se guarda el capítulo c112 porque es el último lógicamente, aunque no sea el último visto en orden temporal
+		u1.anotarCapituloComoReproducido(c112);
+		u1.anotarCapituloComoReproducido(c111);
+
+		// Para comorbar que al ver el ultimo capitulo de una serie esta pasa a terminadas
+		u1.anotarCapituloComoReproducido(c222);
+
+
+	}
 }
