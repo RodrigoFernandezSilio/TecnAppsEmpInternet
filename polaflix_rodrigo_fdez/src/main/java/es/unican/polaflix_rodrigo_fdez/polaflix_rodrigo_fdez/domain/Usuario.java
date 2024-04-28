@@ -101,8 +101,8 @@ public class Usuario {
             if (c.getSerie().equals(serie)) {
                 existeCapituloVistoMismaSerie = true;
                 // Verificar si el capitulo reproducido es posterior al ultimo capitulo visto
-                if (c.getNumTemporada() > temporada.getNumTemporada() || 
-                (c.getNumTemporada() == temporada.getNumTemporada() && c.getNumCapitulo() > capitulo.getNumCapitulo())) {
+                if (temporada.getNumTemporada() > c.getNumTemporada() || 
+                (temporada.getNumTemporada() == c.getNumTemporada() && capitulo.getNumCapitulo() > c.getNumCapitulo())) {
                     ultimosCapitulosVistos.remove(c);
                     ultimosCapitulosVistos.add(nuevoCapituloVisto);
                 }
