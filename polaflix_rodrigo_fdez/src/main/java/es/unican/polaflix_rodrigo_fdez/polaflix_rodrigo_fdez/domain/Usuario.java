@@ -32,6 +32,8 @@ public class Usuario {
 
     private String contrasenha;
 
+    private boolean granConsumidor;
+
     @ManyToMany
     private Set<Serie> seriesPendientes;
 
@@ -130,12 +132,20 @@ public class Usuario {
 
         // Verificar si no hay una ultima factura o si la ultima factura no es para el mes actual
         if (ultimaFactura == null || ultimaFactura.getAnho() != anhoActual || ultimaFactura.getMes() != mesActual) {
-            facturas.add(new Factura(anhoActual, mesActual, new ArrayList<>()));
+            facturas.add(new Factura(anhoActual, mesActual, new ArrayList<>(), 0f));
         }
 
         // Obtener la ultima factura (puede ser la recien creada)
         ultimaFactura = facturas.get(facturas.size() - 1);
         // Agregar la visualizacion a la ultima factura
         ultimaFactura.getVisualizaciones().add(visualizacion);
+        // Verificar si el usuario es gran consumidor
+        if (granConsumidor) {
+            // Si el usuario es un gran consumidor, se establece un precio total fijo de 20 euros
+            ultimaFactura.setPrecioTotal(20f);
+        } else {
+            // Si el usuario no es un gran consumidor, se agrega el precio del ultimo capitulo visto al precio total de la factura
+            ultimaFactura.setPrecioTotal(ultimaFactura.getPrecioTotal() + visualizacion.getPrecio());
+        }
     }
 }

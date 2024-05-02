@@ -37,13 +37,13 @@ public class AppFeeder implements CommandLineRunner {
 	}
 
 	private void feedUsuarios() {
-		Usuario u1 = new Usuario("usuario1", "contrasenha1", 
+		Usuario u1 = new Usuario("usuario1", "contrasenha1", false,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-		Usuario u2 = new Usuario("usuario2", "contrasenha2",
+		Usuario u2 = new Usuario("usuario2", "contrasenha2", false,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-		Usuario u3 = new Usuario("usuario3", "contrasenha3",
+		Usuario u3 = new Usuario("usuario3", "contrasenha3", false,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
 

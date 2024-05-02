@@ -38,4 +38,7 @@ public class Factura {
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
     private List<Visualizacion> visualizaciones;
+
+    @NonNull
+    private Float precioTotal;
 }
