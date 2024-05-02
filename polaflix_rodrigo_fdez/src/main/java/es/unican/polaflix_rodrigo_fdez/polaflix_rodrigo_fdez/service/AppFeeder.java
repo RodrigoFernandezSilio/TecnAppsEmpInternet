@@ -126,9 +126,9 @@ public class AppFeeder implements CommandLineRunner {
 	private void addSeriesToPersonalSpace() {
 		Usuario u1 = ur.findById("usuario1").get();
 		
-		Serie s1 = sr.findByNombre("Los Serrano");
-		Serie s2 = sr.findByNombre("Breaking Bad");
-		Serie s3 = sr.findByNombre("Juego de Tronos");
+		Serie s1 = sr.findByNombre("Los Serrano").get(0);
+		Serie s2 = sr.findByNombre("Breaking Bad").get(0);
+		Serie s3 = sr.findByNombre("Juego de Tronos").get(0);
 
 		u1.agregarSerieEspacioPersonal(s1);
 		u1.agregarSerieEspacioPersonal(s2);
@@ -137,8 +137,8 @@ public class AppFeeder implements CommandLineRunner {
 
 	private void markChapterAsPlayed() {
 		Usuario u1 = ur.findById("usuario1").get();
-		Serie s1 = sr.findByNombre("Los Serrano");
-		Serie s2 = sr.findByNombre("Breaking Bad");
+		Serie s1 = sr.findByNombre("Los Serrano").get(0);
+		Serie s2 = sr.findByNombre("Breaking Bad").get(0);
 
 		Temporada t11 = s1.getTemporadas().get(0); // Primera temporada de Los Serrano
 		Capitulo c111 = t11.getCapitulos().get(0); // Primer capitulo de la primera temporada
