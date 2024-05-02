@@ -1,5 +1,8 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,12 +30,15 @@ public class Capitulo implements Comparable<Capitulo> {
     private long id;
     
     @NonNull
+    @JsonView({Views.DescripcionSerie.class})
     private String titulo;
 
     @NonNull
+    @JsonView({Views.DescripcionSerie.class})
     private String descripcion;
 
     @NonNull
+    @JsonView({Views.DescripcionSerie.class})
     private Integer numCapitulo;
 
     @NonNull

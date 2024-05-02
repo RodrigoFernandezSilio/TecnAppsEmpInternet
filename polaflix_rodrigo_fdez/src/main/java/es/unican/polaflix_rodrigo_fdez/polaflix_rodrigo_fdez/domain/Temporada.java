@@ -2,6 +2,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +34,7 @@ public class Temporada implements Comparable<Temporada> {
     private long id;
 
     @NonNull
+    @JsonView({Views.DescripcionSerie.class})
     private Integer numTemporada;
 
     @NonNull
@@ -38,6 +42,7 @@ public class Temporada implements Comparable<Temporada> {
     private Serie serie;
 
     @NonNull
+    @JsonView({Views.DescripcionSerie.class})
     @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
     private List<Capitulo> capitulos;
 
