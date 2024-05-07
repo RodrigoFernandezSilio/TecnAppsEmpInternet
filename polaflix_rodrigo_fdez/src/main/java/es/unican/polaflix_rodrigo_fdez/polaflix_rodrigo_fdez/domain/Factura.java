@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,5 +42,8 @@ public class Factura {
     private List<Visualizacion> visualizaciones;
 
     @NonNull
-    private Float precioTotal;
+    @Enumerated(EnumType.ORDINAL)
+    private TipoFactura tipoFactura;
+
+    private Float precioTotal = 0f;
 }

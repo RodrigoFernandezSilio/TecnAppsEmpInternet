@@ -8,6 +8,8 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -32,7 +34,8 @@ public class Usuario {
 
     private String contrasenha;
 
-    private boolean granConsumidor;
+    @Enumerated(EnumType.ORDINAL)
+    private TipoUsuario tipoUsuario;
 
     @ManyToMany
     private Set<Serie> seriesPendientes;
@@ -132,19 +135,25 @@ public class Usuario {
 
         // Verificar si no hay una ultima factura o si la ultima factura no es para el mes actual
         if (ultimaFactura == null || ultimaFactura.getAnho() != anhoActual || ultimaFactura.getMes() != mesActual) {
-            facturas.add(new Factura(anhoActual, mesActual, new ArrayList<>(), 0f));
+            if (tipoUsuario == TipoUsuario.ESTANDAR) {
+                // Si el usuario es estandar la factura es variable
+                facturas.add(new Factura(anhoActual, mesActual, new ArrayList<>(), TipoFactura.VARIABLE));                
+            } else if (tipoUsuario == TipoUsuario.GRAN_CONSUMIDOR) {
+                // Si el usuario es gran consumidor la factura es fija
+                facturas.add(new Factura(anhoActual, mesActual, new ArrayList<>(), TipoFactura.FIJA));
+            }
         }
 
         // Obtener la ultima factura (puede ser la recien creada)
         ultimaFactura = facturas.get(facturas.size() - 1);
         // Agregar la visualizacion a la ultima factura
         ultimaFactura.getVisualizaciones().add(visualizacion);
-        // Verificar si el usuario es gran consumidor
-        if (granConsumidor) {
-            // Si el usuario es un gran consumidor, se establece un precio total fijo de 20 euros
+        // Verificar si la factura es fija
+        if (ultimaFactura.getTipoFactura() == TipoFactura.FIJA) {
+            // Si la factura es fija, se establece un precio total fijo de 20 euros
             ultimaFactura.setPrecioTotal(20f);
         } else {
-            // Si el usuario no es un gran consumidor, se agrega el precio del ultimo capitulo visto al precio total de la factura
+            // Si la factura es variable, se agrega el precio del ultimo capitulo visto al precio total de la factura
             ultimaFactura.setPrecioTotal(ultimaFactura.getPrecioTotal() + visualizacion.getPrecio());
         }
     }

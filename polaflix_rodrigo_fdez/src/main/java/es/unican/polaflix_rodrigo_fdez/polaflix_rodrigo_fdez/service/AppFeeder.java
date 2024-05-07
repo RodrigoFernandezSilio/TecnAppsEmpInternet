@@ -14,6 +14,7 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.CategoriaSer
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Persona;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Serie;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Temporada;
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.TipoUsuario;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Usuario;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.SerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.UsuarioRepository;
@@ -38,13 +39,13 @@ public class AppFeeder implements CommandLineRunner {
 	}
 
 	private void feedUsuarios() {
-		Usuario u1 = new Usuario("usuario1", "contrasenha1", false,
+		Usuario u1 = new Usuario("usuario1", "contrasenha1", TipoUsuario.ESTANDAR,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-		Usuario u2 = new Usuario("usuario2", "contrasenha2", false,
+		Usuario u2 = new Usuario("usuario2", "contrasenha2", TipoUsuario.ESTANDAR,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-		Usuario u3 = new Usuario("usuario3", "contrasenha3", false,
+		Usuario u3 = new Usuario("usuario3", "contrasenha3", TipoUsuario.ESTANDAR,
 			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
 
