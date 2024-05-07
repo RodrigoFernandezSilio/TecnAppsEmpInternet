@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,14 +49,14 @@ public class Serie {
     private CategoriaSerie categoriaSerie;
 
     @NonNull
-    @ElementCollection
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonView({Views.DescripcionSerie.class})
-    private List<String> creadores;
+    private List<Persona> creadores;
 
     @NonNull
-    @ElementCollection
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonView({Views.DescripcionSerie.class})
-    private List<String> actores;
+    private List<Persona> actores;
 
     @NonNull
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
