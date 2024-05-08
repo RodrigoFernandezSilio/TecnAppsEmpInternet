@@ -10,4 +10,6 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Serie;
 public interface SerieRepository extends JpaRepository<Serie, Long>{
 
     List<Serie> findByNombre(String nombre);
+
+    List<Serie> findByNombreStartingWith(char letraInicial);
 }
