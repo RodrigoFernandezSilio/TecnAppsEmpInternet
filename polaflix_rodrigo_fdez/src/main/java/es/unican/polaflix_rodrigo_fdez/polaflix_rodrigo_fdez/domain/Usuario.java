@@ -3,7 +3,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -47,10 +49,10 @@ public class Usuario {
     private Set<Serie> seriesTerminadas;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<CapituloVisto> capitulosVistos;
+    private Map<Serie, ConjuntoCapituloVisto> capitulosVistosPorSerie;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<CapituloVisto> ultimosCapitulosVistos;
+    private Map<Serie, CapituloVisto> ultimoCapituloVistoPorSerie;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Factura> facturas;
@@ -97,27 +99,25 @@ public class Usuario {
         }
         
         // Crear una nueva entrada de CapituloVisto
-        CapituloVisto nuevoCapituloVisto = new CapituloVisto(serie, temporada.getNumTemporada(), capitulo.getNumCapitulo());
-        // Agregar la nueva entrada a la lista de capitulos vistos del usuario
-        capitulosVistos.add(nuevoCapituloVisto);
-
-        boolean existeCapituloVistoMismaSerie = false;
-        for (CapituloVisto c : ultimosCapitulosVistos) {
-            if (c.getSerie().equals(serie)) {
-                existeCapituloVistoMismaSerie = true;
-                // Verificar si el capitulo reproducido es posterior al ultimo capitulo visto
-                if (temporada.getNumTemporada() > c.getNumTemporada() || 
-                (temporada.getNumTemporada() == c.getNumTemporada() && capitulo.getNumCapitulo() > c.getNumCapitulo())) {
-                    ultimosCapitulosVistos.remove(c);
-                    ultimosCapitulosVistos.add(nuevoCapituloVisto);
-                }
-                break;
-            }
+        CapituloVisto nuevoCapituloVisto = new CapituloVisto(temporada.getNumTemporada(), capitulo.getNumCapitulo());
+        // Agregar nueva entrada al conjunto correspondiente en el mapa capitulosVistos del usuario
+        ConjuntoCapituloVisto temp = capitulosVistosPorSerie.get(serie);
+        if (temp == null) { // Verificar si el conjunto no existe en el mapa
+            // Si no existe, crear un nuevo ConjuntoCapituloVisto y agregarlo al mapa
+            temp = new ConjuntoCapituloVisto(new HashSet<>());
+            capitulosVistosPorSerie.put(serie, temp);
         }
-        // Verificar si no se encontro ningun capitulo de la misma serie en la lista
-        if (!existeCapituloVistoMismaSerie) {
-            // Agregar el nuevo capitulo a la lista de ultimos capitulos vistos
-            ultimosCapitulosVistos.add(nuevoCapituloVisto);
+        temp.getCapituloVistos().add(nuevoCapituloVisto); // Anhadir el nuevo CapituloVisto al conjunto
+
+        CapituloVisto ultimoCapituloVisto = ultimoCapituloVistoPorSerie.get(serie);
+        if (ultimoCapituloVisto == null) {
+            System.out.println("\n\n ultimoCapituloVisto \n\n");
+            // Si no se encontro ningun capitulo de la misma serie, agregar el nuevo capitulo al mapa de ultimos capitulos vistos
+            ultimoCapituloVistoPorSerie.put(serie, nuevoCapituloVisto);
+        } else if (temporada.getNumTemporada() > ultimoCapituloVisto.getNumTemporada() ||
+        (temporada.getNumTemporada() == ultimoCapituloVisto.getNumTemporada() && capitulo.getNumCapitulo() > ultimoCapituloVisto.getNumCapitulo())) {
+            // Si se encontro un capitulo de la misma serie pero es anterior, agregar el nuevo capitulo al mapa de ultimos capitulos vistos
+            ultimoCapituloVistoPorSerie.put(serie, nuevoCapituloVisto);
         }
 
         Date fechaActual = Calendar.getInstance().getTime();

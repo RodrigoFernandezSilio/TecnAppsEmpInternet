@@ -2,6 +2,7 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,13 @@ public class AppFeeder implements CommandLineRunner {
 
 	private void feedUsuarios() {
 		Usuario u1 = new Usuario("usuario1", "contrasenha1", TipoUsuario.ESTANDAR,
-			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashMap<>(), new HashMap<>(), new ArrayList<>());
 
 		Usuario u2 = new Usuario("usuario2", "contrasenha2", TipoUsuario.ESTANDAR,
-			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashMap<>(), new HashMap<>(), new ArrayList<>());
 
 		Usuario u3 = new Usuario("usuario3", "contrasenha3", TipoUsuario.ESTANDAR,
-			new HashSet<>(), new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+			new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashMap<>(), new HashMap<>(), new ArrayList<>());
 
 
 		ur.save(u1);
@@ -168,7 +169,5 @@ public class AppFeeder implements CommandLineRunner {
 
 		// Para comorbar que al ver el ultimo capitulo de una serie esta pasa a terminadas
 		u1.anotarCapituloComoReproducido(c222);
-
-
 	}
 }
