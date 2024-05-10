@@ -2,6 +2,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,18 +30,23 @@ public class Visualizacion {
     private long id;
 
     @NonNull
+        @JsonView(Views.Factura_Vista.class)
     private Date fecha;
 
     @NonNull
+    @JsonView(Views.Factura_Vista.class)
     private Float precio;
 
     @NonNull
     @ManyToOne
+    @JsonView(Views.Factura_Vista.class)
     private Serie serie;
 
     @NonNull
+    @JsonView(Views.Factura_Vista.class)
     private Integer numTemporada;
 
     @NonNull
+    @JsonView(Views.Factura_Vista.class)
     private Integer numCapitulo;    
 }

@@ -2,6 +2,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +31,6 @@ public class ConjuntoCapituloVisto {
 
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonView(Views.UsuarioSerieDTO_Vista.class)
     private Set<CapituloVisto> capituloVistos;
 }

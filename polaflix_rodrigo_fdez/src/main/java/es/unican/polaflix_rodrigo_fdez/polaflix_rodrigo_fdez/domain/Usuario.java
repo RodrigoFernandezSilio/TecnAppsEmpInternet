@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,6 +35,7 @@ import lombok.ToString;
 public class Usuario {
 
     @Id
+    @JsonView({Views.UsuarioInicio.class})
     private String nombreUsuario;
 
     private String contrasenha;
@@ -40,12 +44,15 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
 
     @ManyToMany
+    @JsonView({Views.UsuarioInicio.class})
     private Set<Serie> seriesPendientes;
 
     @ManyToMany
+    @JsonView({Views.UsuarioInicio.class})
     private Set<Serie> seriesEmpezadas;
 
     @ManyToMany
+    @JsonView({Views.UsuarioInicio.class})
     private Set<Serie> seriesTerminadas;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -111,7 +118,6 @@ public class Usuario {
 
         CapituloVisto ultimoCapituloVisto = ultimoCapituloVistoPorSerie.get(serie);
         if (ultimoCapituloVisto == null) {
-            System.out.println("\n\n ultimoCapituloVisto \n\n");
             // Si no se encontro ningun capitulo de la misma serie, agregar el nuevo capitulo al mapa de ultimos capitulos vistos
             ultimoCapituloVistoPorSerie.put(serie, nuevoCapituloVisto);
         } else if (temporada.getNumTemporada() > ultimoCapituloVisto.getNumTemporada() ||
@@ -156,5 +162,14 @@ public class Usuario {
             // Si la factura es variable, se agrega el precio del ultimo capitulo visto al precio total de la factura
             ultimaFactura.setPrecioTotal(ultimaFactura.getPrecioTotal() + visualizacion.getPrecio());
         }
+    }
+
+    public Factura obteneFacturaPorAnhoYMes(int anho, int mes) {
+        for (Factura f: facturas) {
+            if (f.getAnho() == anho && f.getMes() == mes) {
+                return f;
+            }
+        }
+        return null;
     }
 }

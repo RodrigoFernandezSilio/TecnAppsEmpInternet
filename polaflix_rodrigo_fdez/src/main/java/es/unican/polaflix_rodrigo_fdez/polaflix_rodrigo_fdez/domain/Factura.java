@@ -2,6 +2,9 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,18 +35,22 @@ public class Factura {
     private long id;
 
     @NonNull
+    @JsonView(Views.Factura_Vista.class)
     private Integer anho;
 
     @NonNull
+    @JsonView(Views.Factura_Vista.class)
     private Integer mes;
 
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonView(Views.Factura_Vista.class)
     private List<Visualizacion> visualizaciones;
 
     @NonNull
     @Enumerated(EnumType.ORDINAL)
     private TipoFactura tipoFactura;
 
+    @JsonView(Views.Factura_Vista.class)
     private Float precioTotal = 0f;
 }

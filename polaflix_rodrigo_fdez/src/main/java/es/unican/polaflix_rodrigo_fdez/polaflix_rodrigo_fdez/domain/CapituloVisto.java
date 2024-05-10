@@ -1,5 +1,8 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +26,10 @@ public class CapituloVisto {
     private long id;
 
     @NonNull
+    @JsonView(Views.UsuarioSerieDTO_Vista.class)
     private Integer numTemporada;
 
     @NonNull
+    @JsonView(Views.UsuarioSerieDTO_Vista.class)
     private Integer numCapitulo;
 }

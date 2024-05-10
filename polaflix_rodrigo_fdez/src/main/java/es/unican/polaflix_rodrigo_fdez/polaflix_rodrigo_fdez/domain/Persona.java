@@ -1,5 +1,8 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,11 +29,14 @@ public class Persona {
     private Long id;
 
     @NonNull
+    @JsonView(Views.SerieResumen.class)
     private String nombre;
 
     @NonNull
+    @JsonView(Views.SerieResumen.class)
     private String apellido1;
     
     @NonNull
+    @JsonView(Views.SerieResumen.class)
     private String apellido2;
 }

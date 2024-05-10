@@ -30,11 +30,12 @@ import lombok.ToString;
 public class Temporada implements Comparable<Temporada> {
 
     @Id
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private Integer numTemporada;
 
     @NonNull
@@ -42,7 +43,7 @@ public class Temporada implements Comparable<Temporada> {
     private Serie serie;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
     private List<Capitulo> capitulos;
 

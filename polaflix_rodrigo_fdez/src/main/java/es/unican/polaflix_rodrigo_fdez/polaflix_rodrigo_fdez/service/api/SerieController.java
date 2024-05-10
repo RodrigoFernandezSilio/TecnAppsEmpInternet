@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -21,12 +22,11 @@ public class SerieController {
     protected SerieRepository sr;
 
     @GetMapping
-    @JsonView(Views.DescripcionSerie.class)
-	public ResponseEntity<List<Serie>> getSeries() {
+    @JsonView(Views.SerieResumen.class)
+    public ResponseEntity<List<Serie>> obtenerSeriesPorLetraInicial(
+            @RequestParam(required = true) char letraInicial) {
 
-        ResponseEntity<List<Serie>> result = ResponseEntity.ok(sr.findAll());
-		
-		return result;
-	}
+        return ResponseEntity.ok(sr.findByNombreStartingWith(letraInicial));
+    }
 
 }

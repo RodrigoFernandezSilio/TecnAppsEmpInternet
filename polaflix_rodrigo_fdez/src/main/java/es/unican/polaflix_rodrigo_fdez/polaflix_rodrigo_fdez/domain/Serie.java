@@ -33,33 +33,34 @@ public class Serie {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @JsonView({Views.UsuarioInicio.class, Views.UsuarioSerieDTO_Vista.class, Views.SerieResumen.class})
     private long id;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioInicio.class, Views.UsuarioSerieDTO_Vista.class, Views.SerieResumen.class, Views.Factura_Vista.class})
     private String nombre;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.SerieResumen.class})
     private String sinopsis;
 
     @NonNull
     @Enumerated(EnumType.ORDINAL)
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private CategoriaSerie categoriaSerie;
 
     @NonNull
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.SerieResumen.class})
     private List<Persona> creadores;
 
     @NonNull
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.SerieResumen.class})
     private List<Persona> actores;
 
     @NonNull
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private List<Temporada> temporadas;
 }

@@ -26,19 +26,20 @@ import lombok.ToString;
 public class Capitulo implements Comparable<Capitulo> {
 
     @Id
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private String titulo;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private String descripcion;
 
     @NonNull
-    @JsonView({Views.DescripcionSerie.class})
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private Integer numCapitulo;
 
     @NonNull
