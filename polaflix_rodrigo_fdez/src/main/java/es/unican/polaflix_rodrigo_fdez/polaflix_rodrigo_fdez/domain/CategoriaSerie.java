@@ -1,17 +1,38 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
-public enum CategoriaSerie {
-    ESTANDAR(0.5f),
-    SILVER(0.75f),
-    GOLD(1.5f);
+import com.fasterxml.jackson.annotation.JsonView;
 
-    private final float precio;
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.service.api.Views;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-    CategoriaSerie(float precio) {
-        this.precio = precio;
-    }
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode
+@ToString
+@Entity
+public class CategoriaSerie {
 
-    public float getPrecio() {
-        return precio;
-    }
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+
+    @NonNull
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
+    private String categoria;
+
+    @NonNull
+    @JsonView({Views.UsuarioSerieDTO_Vista.class})
+    private Float precio;
 }
