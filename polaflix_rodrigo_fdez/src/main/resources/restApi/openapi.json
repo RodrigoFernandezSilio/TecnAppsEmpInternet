@@ -1,0 +1,552 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Polaflix API",
+    "description": "API para la aplicación Polaflix.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SerieController",
+      "description": "Controlador para manejar operaciones relacionadas con series, como la búsqueda y recuperación de información sobre series."
+    },
+    {
+      "name": "UsuarioController",
+      "description": "Controlador para gestionar operaciones relacionadas con usuarios, como la obtención de detalles de usuario y la gestión de sus datos relacionados con series y visualización de contenido."
+    }
+  ],
+  "paths": {
+    "/usuarios/{usuarioID}/series": {
+      "patch": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Agregar serie al espacio personal",
+        "description": "Agrega una serie al espacio personal del usuario",
+        "operationId": "agregarSerieAEspacioPersonal",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Serie agregada al espacio personal del usuario"
+          },
+          "404": {
+            "description": "Usuario o serie no encontrados"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioID}/series/{serieID}": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Obtener información de una serie por usuario",
+        "description": "Devuelve la información de una serie específica para un usuario específico",
+        "operationId": "obtenerInformacionSeriePorUsuario",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serieID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información de la serie encontrada",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioSerieDTO_UsuarioSerieDTO_Vista"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario o serie no encontrados"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Anotar capítulo como reproducido",
+        "description": "Marca un capítulo como reproducido para un usuario específico",
+        "operationId": "anotarCapituloComoReproducido",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serieID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemporadaCapituloDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Capítulo anotado como reproducido"
+          },
+          "404": {
+            "description": "Usuario o serie no encontrados"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioID}": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Obtener usuario por ID",
+        "description": "Devuelve los detalles de un usuario específico por su ID",
+        "operationId": "obtenerUsuario",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario_UsuarioInicio"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioID}/facturas": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Obtener factura por año y mes",
+        "description": "Devuelve la factura de un usuario específico para un año y mes determinados",
+        "operationId": "obtenerFacturasPorAnhoYMes",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "anho",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mes",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Factura encontrada",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Factura_Factura_Vista"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    },
+    "/series": {
+      "get": {
+        "tags": [
+          "serie-controller"
+        ],
+        "summary": "Buscar series por letra inicial o nombre",
+        "description": "Si se proporciona un nombre, se realiza una búsqueda exacta y, si tiene éxito, la página mostrará el listado de la inicial que corresponda con la serie encontrada. Si la búsqueda por nombre no encuentra resultados, se devuelve un error. Si no se proporciona un nombre, se buscan las series cuyos nombres comienzan con la letra inicial especificada.",
+        "operationId": "obtenerSeries",
+        "parameters": [
+          {
+            "name": "letraInicial",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nombre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Series encontradas",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Serie_SerieResumen"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Serie no encontrada"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TemporadaCapituloDTO": {
+        "type": "object",
+        "properties": {
+          "numTemporada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numCapitulo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Serie_UsuarioInicio": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          }
+        }
+      },
+      "Usuario_UsuarioInicio": {
+        "type": "object",
+        "properties": {
+          "nombreUsuario": {
+            "type": "string"
+          },
+          "seriesPendientes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Serie_UsuarioInicio"
+            }
+          },
+          "seriesEmpezadas": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Serie_UsuarioInicio"
+            }
+          },
+          "seriesTerminadas": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Serie_UsuarioInicio"
+            }
+          }
+        }
+      },
+      "CapituloVisto_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "numTemporada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numCapitulo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Capitulo_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "numCapitulo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CategoriaSerie_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ConjuntoCapituloVisto_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "capituloVistos": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CapituloVisto_UsuarioSerieDTO_Vista"
+            }
+          }
+        }
+      },
+      "Serie_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "categoriaSerie": {
+            "$ref": "#/components/schemas/CategoriaSerie_UsuarioSerieDTO_Vista"
+          },
+          "temporadas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Temporada_UsuarioSerieDTO_Vista"
+            }
+          }
+        }
+      },
+      "Temporada_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numTemporada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capitulos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Capitulo_UsuarioSerieDTO_Vista"
+            }
+          }
+        }
+      },
+      "UsuarioSerieDTO_UsuarioSerieDTO_Vista": {
+        "type": "object",
+        "properties": {
+          "serie": {
+            "$ref": "#/components/schemas/Serie_UsuarioSerieDTO_Vista"
+          },
+          "conjuntoCapituloVisto": {
+            "$ref": "#/components/schemas/ConjuntoCapituloVisto_UsuarioSerieDTO_Vista"
+          },
+          "ultimoCapituloVisto": {
+            "$ref": "#/components/schemas/CapituloVisto_UsuarioSerieDTO_Vista"
+          }
+        }
+      },
+      "Factura_Factura_Vista": {
+        "type": "object",
+        "properties": {
+          "anho": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visualizaciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Visualizacion_Factura_Vista"
+            }
+          },
+          "precioTotal": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Serie_Factura_Vista": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          }
+        }
+      },
+      "Visualizacion_Factura_Vista": {
+        "type": "object",
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "precio": {
+            "type": "number",
+            "format": "float"
+          },
+          "serie": {
+            "$ref": "#/components/schemas/Serie_Factura_Vista"
+          },
+          "numTemporada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numCapitulo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Persona_SerieResumen": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido1": {
+            "type": "string"
+          },
+          "apellido2": {
+            "type": "string"
+          }
+        }
+      },
+      "Serie_SerieResumen": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "sinopsis": {
+            "type": "string"
+          },
+          "creadores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Persona_SerieResumen"
+            }
+          },
+          "actores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Persona_SerieResumen"
+            }
+          }
+        }
+      }
+    }
+  }
+}
