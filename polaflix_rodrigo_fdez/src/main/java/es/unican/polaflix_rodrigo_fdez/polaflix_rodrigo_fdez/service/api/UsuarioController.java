@@ -26,13 +26,15 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.dto.TemporadaCapitu
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.dto.UsuarioSerieDTO;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.SerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "UsuarioController", description = "Controlador para gestionar operaciones relacionadas con usuarios, como la obtención de detalles de usuario y la gestión de sus datos relacionados con series y visualización de contenido.")
 public class UsuarioController {
 
     @Autowired
@@ -43,6 +45,11 @@ public class UsuarioController {
 
     @GetMapping("/{usuarioID}")
     @JsonView(Views.UsuarioInicio.class)
+    @Operation(summary = "Obtener usuario por ID", description = "Devuelve los detalles de un usuario específico por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario encontrado"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
+    })
     public ResponseEntity<Usuario> obtenerUsuario(@PathVariable String usuarioID) {
         Optional<Usuario> usuario = ur.findById(usuarioID);
         if (usuario.isPresent()) {
@@ -54,6 +61,11 @@ public class UsuarioController {
 
     @GetMapping("/{usuarioID}/series/{serieID}")
     @JsonView(Views.UsuarioSerieDTO_Vista.class)
+    @Operation(summary = "Obtener información de una serie por usuario", description = "Devuelve la información de una serie específica para un usuario específico")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Información de la serie encontrada"),
+        @ApiResponse(responseCode = "404", description = "Usuario o serie no encontrados", content = @Content)
+    })
     public ResponseEntity<UsuarioSerieDTO> obtenerInformacionSeriePorUsuario(
             @PathVariable("usuarioID") String usuarioID,
             @PathVariable("serieID") Long serieID) {
@@ -81,6 +93,11 @@ public class UsuarioController {
 
     @PatchMapping("/{usuarioID}/series/{serieID}")
     @Transactional
+    @Operation(summary = "Anotar capítulo como reproducido", description = "Marca un capítulo como reproducido para un usuario específico")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Capítulo anotado como reproducido", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Usuario o serie no encontrados", content = @Content)
+    })
     public ResponseEntity<String> anotarCapituloComoReproducido(
             @PathVariable("usuarioID") String usuarioID,
             @PathVariable("serieID") Long serieID,
@@ -94,9 +111,8 @@ public class UsuarioController {
                 Usuario usuario = usuarioOptional.get();
                 Serie serie = serieOptional.get();
 
-                Temporada temporada = serie.getTemporadas().get(temporadaCapituloDTO.getNumTemporada()-1);
-                Capitulo capitulo = temporada.getCapitulos().get(temporadaCapituloDTO.getNumCapitulo()-1);
-
+                Temporada temporada = serie.getTemporadas().get(temporadaCapituloDTO.getNumTemporada() - 1);
+                Capitulo capitulo = temporada.getCapitulos().get(temporadaCapituloDTO.getNumCapitulo() - 1);
 
                 System.out.println(capitulo.getTitulo() + capitulo.getNumCapitulo());
                 usuario.anotarCapituloComoReproducido(capitulo);
@@ -112,6 +128,11 @@ public class UsuarioController {
 
     @PatchMapping("/{usuarioID}/series")
     @Transactional
+    @Operation(summary = "Agregar serie al espacio personal", description = "Agrega una serie al espacio personal del usuario")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Serie agregada al espacio personal del usuario", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Usuario o serie no encontrados", content = @Content)
+    })
     public ResponseEntity<String> agregarSerieAEspacioPersonal(
             @PathVariable("usuarioID") String usuarioID,
             @RequestBody Long serieID) {
@@ -137,6 +158,11 @@ public class UsuarioController {
 
     @GetMapping("/{usuarioID}/facturas")
     @JsonView(Views.Factura_Vista.class)
+    @Operation(summary = "Obtener factura por año y mes", description = "Devuelve la factura de un usuario específico para un año y mes determinados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Factura encontrada"),
+        @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
+    })
     public ResponseEntity<Factura> obtenerFacturasPorAnhoYMes(
             @PathVariable("usuarioID") String usuarioID,
             @RequestParam(required = true) int anho,
