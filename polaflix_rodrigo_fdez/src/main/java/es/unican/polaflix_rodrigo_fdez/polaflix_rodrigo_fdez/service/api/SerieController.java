@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/series")
 @Tag(name = "SerieController", description = "Controlador para manejar operaciones relacionadas con series, como la búsqueda y recuperación de información sobre series.")
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600) // Permitir solicitudes desde http://localhost:4200
 public class SerieController {
 
     @Autowired

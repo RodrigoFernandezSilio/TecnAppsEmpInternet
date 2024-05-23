@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/usuarios")
 @Tag(name = "UsuarioController", description = "Controlador para gestionar operaciones relacionadas con usuarios, como la obtención de detalles de usuario y la gestión de sus datos relacionados con series y visualización de contenido.")
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600) // Permitir solicitudes desde http://localhost:4200
 public class UsuarioController {
 
     @Autowired
