@@ -2,7 +2,6 @@ package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +71,7 @@ public class Usuario {
      * @param serie La serie que se va a agregar al espacio personal del usuario.
      */
     public void agregarSerieEspacioPersonal(Serie serie) {
-        // Verificar si la serie no está ni en seriesPendientes, ni en seriesEmpezadas, ni en seriesTerminadas
+        // Verificar si la serie no esta ni en seriesPendientes, ni en seriesEmpezadas, ni en seriesTerminadas
         if (!seriesPendientes.contains(serie) && !seriesEmpezadas.contains(serie) && !seriesTerminadas.contains(serie)) {
             // Si la serie cumple con las condiciones, se agrega pendientes
             seriesPendientes.add(serie);
@@ -80,6 +79,18 @@ public class Usuario {
     }
 
 
+    /**
+     * Anota un capitulo como reproducido.
+     * 
+     * Si la serie a la que pertenece el capitulo no esta en las listas de pendientes, empezadas ni terminadas, el metodo termina.
+     * Si la serie esta en la lista de pendientes, se mueve a la lista de empezadas.
+     * Si el capitulo es el ultimo de la serie, la serie se mueve a la lista de terminadas.
+     * Crea una nueva entrada en capitulosVistosPorSerie.
+     * Actualiza ultimoCapituloVistoPorSerie si corresponde.
+     * Anhade la visualizacion correspondiente a la ultima factura
+     * 
+     * @param capitulo el capitulo que esta siendo reproducido
+     */
     public void anotarCapituloComoReproducido(Capitulo capitulo) {
         Temporada temporada = capitulo.getTemporada();
         Serie serie = temporada.getSerie();
@@ -125,10 +136,6 @@ public class Usuario {
             // Si se encontro un capitulo de la misma serie pero es anterior, agregar el nuevo capitulo al mapa de ultimos capitulos vistos
             ultimoCapituloVistoPorSerie.put(serie, nuevoCapituloVisto);
         }
-
-        Date fechaActual = Calendar.getInstance().getTime();
-        Visualizacion visualizacion = new Visualizacion(
-            fechaActual, serie.getCategoriaSerie().getPrecio(), serie, temporada.getNumTemporada(), capitulo.getNumCapitulo());
         
         Factura ultimaFactura = null;
         if (!facturas.isEmpty()) {
@@ -152,16 +159,12 @@ public class Usuario {
 
         // Obtener la ultima factura (puede ser la recien creada)
         ultimaFactura = facturas.get(facturas.size() - 1);
-        // Agregar la visualizacion a la ultima factura
-        ultimaFactura.getVisualizaciones().add(visualizacion);
-        // Verificar si la factura es fija
-        if (ultimaFactura.getTipoFactura() == TipoFactura.FIJA) {
-            // Si la factura es fija, se establece un precio total fijo de 20 euros
-            ultimaFactura.setPrecioTotal(20f);
-        } else {
-            // Si la factura es variable, se agrega el precio del ultimo capitulo visto al precio total de la factura
-            ultimaFactura.setPrecioTotal(ultimaFactura.getPrecioTotal() + visualizacion.getPrecio());
-        }
+        // Anhadir la visualizacion a la factura
+        ultimaFactura.anhadirVisualizacion(capitulo);
+
+
+
+        
     }
 
     public Factura obteneFacturaPorAnhoYMes(int anho, int mes) {
