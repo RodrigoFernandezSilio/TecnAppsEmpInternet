@@ -67,7 +67,7 @@ public class AppFeeder implements CommandLineRunner {
 		CategoriaSerie gold = new CategoriaSerie("GOLD", 1.50f);
 
 		Serie s1 = new Serie("Los Serrano", "Comedia familiar sobre una familia peculiar", estandar,
-			Arrays.asList(creador1, creador2), Arrays.asList(actor1, actor2), new ArrayList<>());
+			new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
 
 		Temporada t11 = new Temporada(1, s1, new ArrayList<>());
 		Temporada t12 = new Temporada(2, s1, new ArrayList<>());
@@ -91,7 +91,7 @@ public class AppFeeder implements CommandLineRunner {
 		actor2 = new Persona("Aaron", "Paul", "");
 
 		Serie s2 = new Serie("Breaking Bad", "Un profesor de quimica se convierte en fabricante de metanfetamina",
-			silver, Arrays.asList(creador1), Arrays.asList(actor1, actor2), new ArrayList<>());
+			silver, new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
 
 		Temporada t21 = new Temporada(1, s2, new ArrayList<>());
 		Temporada t22 = new Temporada(2, s2, new ArrayList<>());
@@ -117,7 +117,7 @@ public class AppFeeder implements CommandLineRunner {
 		actor2 = new Persona("Kit", "Harington", "");
 
 		Serie s3 = new Serie("Juego de Tronos", "Drama y fantasia medieval", gold,
-			Arrays.asList(creador1, creador2), Arrays.asList(actor1, actor2), new ArrayList<>());
+			new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
 
 		Temporada t31 = new Temporada(1, s3, new ArrayList<>());
 		Temporada t32 = new Temporada(2, s3, new ArrayList<>());
