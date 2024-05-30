@@ -1,6 +1,7 @@
 package es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -51,12 +52,12 @@ public class Serie {
     @NonNull
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonView({Views.SerieResumen.class})
-    private List<Persona> creadores;
+    private Set<Persona> creadores;
 
     @NonNull
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonView({Views.SerieResumen.class})
-    private List<Persona> actores;
+    private Set<Persona> actores;
 
     @NonNull
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
