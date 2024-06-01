@@ -13,11 +13,11 @@
   ],
   "tags": [
     {
-      "name": "SerieController",
+      "name": "serie-controller",
       "description": "Controlador para manejar operaciones relacionadas con series, como la búsqueda y recuperación de información sobre series."
     },
     {
-      "name": "UsuarioController",
+      "name": "usuario-controller",
       "description": "Controlador para gestionar operaciones relacionadas con usuarios, como la obtención de detalles de usuario y la gestión de sus datos relacionados con series y visualización de contenido."
     }
   ],
@@ -280,6 +280,31 @@
           },
           "404": {
             "description": "Serie no encontrada"
+          }
+        }
+      }
+    },
+    "/series/numero": {
+      "get": {
+        "tags": [
+          "serie-controller"
+        ],
+        "summary": "Buscar series cuyo nombre comienza con un número",
+        "description": "Buscar las series cuyos nombres comienzan con un número.",
+        "operationId": "obtenerSeriesQueEmpiezanPorNumero",
+        "responses": {
+          "200": {
+            "description": "Series encontradas",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Serie_SerieResumen"
+                  }
+                }
+              }
+            }
           }
         }
       }

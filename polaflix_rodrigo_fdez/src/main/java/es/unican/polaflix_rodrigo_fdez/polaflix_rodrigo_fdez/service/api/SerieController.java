@@ -51,4 +51,14 @@ public class SerieController {
         }
     }
 
+    @GetMapping("/numero")
+    @JsonView(Views.SerieResumen.class)
+    @Operation(summary = "Buscar series cuyo nombre comienza con un número", description = "Buscar las series cuyos nombres comienzan con un número.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Series encontradas")
+    })
+    public ResponseEntity<List<Serie>> obtenerSeriesQueEmpiezanPorNumero() {
+        return ResponseEntity.ok(sr.findByNombreStartingWithNumber());
+    }
+
 }
