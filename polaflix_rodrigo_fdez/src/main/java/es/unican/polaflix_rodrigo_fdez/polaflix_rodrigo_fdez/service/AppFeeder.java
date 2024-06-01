@@ -85,6 +85,7 @@ public class AppFeeder implements CommandLineRunner {
 		s1.getTemporadas().add(t11);
 		s1.getTemporadas().add(t12);
 
+
 		/* Breaking Bad */
 		creador1 = new Persona("Vince", "Gilligan", "");
 		actor1 = new Persona("Bryan", "Cranston", "");
@@ -134,11 +135,115 @@ public class AppFeeder implements CommandLineRunner {
 		
 		s3.getTemporadas().add(t31);
 		s3.getTemporadas().add(t32);
-		
 
-		sr.save(s1);
-		sr.save(s2);
-		sr.save(s3);
+
+		/* 24 */
+		creador1 = new Persona("Joel", "Surnow", "");
+		actor1 = new Persona("Kiefer", "Sutherland", "");
+
+		Serie s4 = new Serie("24", "Thriller de acción y drama político", estandar,
+			new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1)), new ArrayList<>());
+
+		Temporada t41 = new Temporada(1, s4, new ArrayList<>());
+		Temporada t42 = new Temporada(2, s4, new ArrayList<>());
+
+		Capitulo c411 = new Capitulo("12:00 a.m. - 1:00 a.m.", "Inicio del día más largo de Jack Bauer", 1, t41);
+		Capitulo c412 = new Capitulo("1:00 a.m. - 2:00 a.m.", "Jack intenta evitar un ataque terrorista", 2, t41);
+		Capitulo c421 = new Capitulo("8:00 a.m. - 9:00 a.m.", "Bauer debe enfrentarse a una nueva amenaza", 1, t42);
+		Capitulo c422 = new Capitulo("9:00 a.m. - 10:00 a.m.", "La situación se complica para Jack y su equipo", 2, t42);
+
+		t41.getCapitulos().add(c411);
+		t41.getCapitulos().add(c412);
+		t42.getCapitulos().add(c421);
+		t42.getCapitulos().add(c422);
+
+		s4.getTemporadas().add(t41);
+		s4.getTemporadas().add(t42);
+
+
+		/* 13 Reasons Why */
+		creador1 = new Persona("Brian", "Yorkey", "");
+		actor1 = new Persona("Dylan", "Minnette", "");
+		actor2 = new Persona("Katherine", "Langford", "");
+
+		Serie s5 = new Serie("13 Reasons Why", "Un adolescente recibe una serie de cintas de una compañera de clase que se suicidó.", estandar,
+        new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
+
+		Temporada t51 = new Temporada(1, s5, new ArrayList<>());
+		Temporada t52 = new Temporada(2, s5, new ArrayList<>());
+
+		Capitulo c511 = new Capitulo("Tape 1, Side A", "Clay Jensen escucha la primera cinta de Hannah Baker.", 1, t51);
+		Capitulo c512 = new Capitulo("Tape 1, Side B", "La historia de Hannah continúa revelando secretos.", 2, t51);
+		Capitulo c521 = new Capitulo("Tape 2, Side A", "Clay descubre más sobre la vida de Hannah.", 1, t52);
+		Capitulo c522 = new Capitulo("Tape 2, Side B", "Las cintas empiezan a afectar la vida de Clay.", 2, t52);
+
+		t51.getCapitulos().add(c511);
+		t51.getCapitulos().add(c512);
+		t52.getCapitulos().add(c521);
+		t52.getCapitulos().add(c522);
+
+		s5.getTemporadas().add(t51);
+		s5.getTemporadas().add(t52);
+
+
+		/* Los Simpson */
+		creador1 = new Persona("Matt", "Groening", "");
+		actor1 = new Persona("Dan", "Castellaneta", "");
+		actor2 = new Persona("Nancy", "Cartwright", "");
+	
+		Serie s6 = new Serie("Los Simpson", "Una familia disfuncional vive en una ciudad ficticia llamada Springfield.", 
+			silver, new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
+	
+		Temporada t61 = new Temporada(1, s6, new ArrayList<>());
+		Temporada t62 = new Temporada(2, s6, new ArrayList<>());
+	
+		Capitulo c611 = new Capitulo("Simpsons Roasting on an Open Fire", "Homer descubre que no recibirá el bono de Navidad.", 1, t61);
+		Capitulo c612 = new Capitulo("Bart the Genius", "Bart hace trampa en una prueba de inteligencia.", 2, t61);
+		Capitulo c621 = new Capitulo("Bart Gets an F", "Bart trata de aprobar un examen para evitar repetir el curso.", 1, t62);
+		Capitulo c622 = new Capitulo("Simpson and Delilah", "Homer usa un producto milagroso para hacer crecer su cabello.", 2, t62);
+	
+		t61.getCapitulos().add(c611);
+		t61.getCapitulos().add(c612);
+		t62.getCapitulos().add(c621);
+		t62.getCapitulos().add(c622);
+	
+		s6.getTemporadas().add(t61);
+		s6.getTemporadas().add(t62);
+
+
+		/* Lost */
+		creador1 = new Persona("J.J.", "Abrams", "");
+		creador2 = new Persona("Damon", "Lindelof", "");
+		actor1 = new Persona("Matthew", "Fox", "");
+		actor2 = new Persona("Evangeline", "Lilly", "");
+	
+		Serie s7 = new Serie("Lost", "Un grupo de supervivientes de un accidente aéreo están varados en una misteriosa isla tropical.", 
+			silver, new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
+	
+		Temporada t71 = new Temporada(1, s7, new ArrayList<>());
+		Temporada t72 = new Temporada(2, s7, new ArrayList<>());
+	
+		Capitulo c711 = new Capitulo("Piloto", "Los supervivientes del vuelo 815 de Oceanic Airlines se estrellan en una isla.", 1, t71);
+		Capitulo c712 = new Capitulo("Tabula Rasa", "Los supervivientes intentan adaptarse a la vida en la isla.", 2, t71);
+		Capitulo c721 = new Capitulo("Man of Science, Man of Faith", "Jack comienza a explorar la misteriosa escotilla.", 1, t72);
+		Capitulo c722 = new Capitulo("Adrift", "Michael y Sawyer enfrentan peligros en el mar.", 2, t72);
+	
+		t71.getCapitulos().add(c711);
+		t71.getCapitulos().add(c712);
+		t72.getCapitulos().add(c721);
+		t72.getCapitulos().add(c722);
+	
+		s7.getTemporadas().add(t71);
+		s7.getTemporadas().add(t72);
+
+
+		sr.save(s1); // Guardar la serie "Los Serrano" en el repositorio
+		sr.save(s2); // Guardar la serie "Breaking Bad" en el repositorio
+		sr.save(s3); // Guardar la serie "Juego de Tronos" en el repositorio
+		sr.save(s4); // Guardar la serie "24" en el repositorio
+		sr.save(s5); // Guardar la serie "13 Reasons Why" en el repositorio
+		sr.save(s6); // Guardar la serie "Los Simpson" en el repositorio
+		sr.save(s7); // Guardar la serie "Lost" en el repositorio
 	}
 
 	private void addSeriesToPersonalSpace() {
