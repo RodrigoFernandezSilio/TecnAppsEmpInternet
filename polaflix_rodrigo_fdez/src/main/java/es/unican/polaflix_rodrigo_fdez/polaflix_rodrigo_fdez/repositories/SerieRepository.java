@@ -12,7 +12,7 @@ public interface SerieRepository extends JpaRepository<Serie, Long>{
 
     List<Serie> findByNombre(String nombre);
 
-    List<Serie> findByNombreStartingWith(char letraInicial);
+    List<Serie> findByNombreStartingWith(char charInicial);
 
     @Query(value = "SELECT * FROM Serie WHERE nombre REGEXP '^[0-9]'", nativeQuery = true)
     List<Serie> findByNombreStartingWithNumber();
