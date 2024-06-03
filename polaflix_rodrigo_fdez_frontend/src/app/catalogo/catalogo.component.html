@@ -1,0 +1,18 @@
+<div style="display: inline-block;">
+    <a *ngFor="let e of letrasYNumeros" (click)="seleccionarLetra(e)">{{ e }}</a>
+</div>
+
+<div id="search-component" style="display: inline-block;">
+    <label for="search-box"></label>
+    <input #searchBox id="search-box" placeholder="Nombre de la serie" />
+    <button (click)="buscar()">Buscar</button>
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let s of serie">
+            {{ s.nombre }}
+            <button (click)="agregarSerie(s)">Agregar</button>
+        </li>
+    </ul>
+</div>

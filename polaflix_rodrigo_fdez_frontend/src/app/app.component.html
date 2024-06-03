@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+<div *ngIf="usuario">
+  <h2>Bienvenido {{ usuario.nombreUsuario }}</h2>
+</div>
+<nav>
+  <a routerLink="/inicio">Inicio</a>
+  <a routerLink="/catalogo">Agregar Serie</a>
+  <a>Ver Cargos</a>
+</nav>
+<router-outlet></router-outlet>

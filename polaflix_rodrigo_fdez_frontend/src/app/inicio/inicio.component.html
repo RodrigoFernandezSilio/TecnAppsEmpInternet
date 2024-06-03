@@ -1,0 +1,30 @@
+<!-- app.component.html -->
+
+<div *ngIf="usuario">
+    <h3 class="series-title">Series empezadas</h3>
+    <div class="series-container">
+        <ul class="series-list">
+            <li *ngFor="let serie of usuario.seriesEmpezadas" class="series-list-item">
+                {{ serie.nombre }}
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="series-title">Series pendientes</h3>
+    <div class="series-container">
+        <ul class="series-list">
+            <li *ngFor="let serie of usuario.seriesPendientes" class="series-list-item">
+                {{ serie.nombre }}
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="series-title">Series terminadas</h3>
+    <div class="series-container">
+        <ul class="series-list">
+            <li *ngFor="let serie of usuario.seriesTerminadas" class="series-list-item">
+                {{ serie.nombre }}
+            </li>
+        </ul>
+    </div>
+</div>

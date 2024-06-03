@@ -1,0 +1,26 @@
+/* Estilo para los contenedores de las cajas */
+.series-container {
+    border: 1px solid #ccc; /* Borde gris para las cajas */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 20px; /* Margen inferior entre cajas */
+  }
+  
+  /* Estilo para los títulos de los grupos de series */
+  .series-title {
+    font-size: 18px; /* Tamaño de fuente del título */
+    margin-top: 0; /* Eliminar margen superior */
+    margin-bottom: 10px; /* Espacio entre el título y la lista de series */
+  }
+  
+  /* Estilo para la lista de series */
+  .series-list {
+    list-style-type: none; /* Eliminar viñetas de la lista */
+    padding: 0; /* Eliminar el relleno predeterminado de la lista */
+    margin: 0; /* Eliminar el margen predeterminado de la lista */
+  }
+  
+  /* Estilo para los elementos de la lista de series */
+  .series-list-item {
+    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+  }
+  
