@@ -237,6 +237,32 @@ public class AppFeeder implements CommandLineRunner {
 		s7.getTemporadas().add(t72);
 
 
+		/* Aquí no hay quien viva */
+		creador1 = new Persona("Laura", "Caballero", "");
+		creador2 = new Persona("Alberto", "Caballero", "");
+		actor1 = new Persona("José", "Luis", "Gil");
+		actor2 = new Persona("Fernando", "Tejero", "");
+	
+		Serie s8 = new Serie("Aquí no hay quien viva", "Comedia sobre la vida en una comunidad de vecinos en un edificio del centro de Madrid.", 
+			estandar, new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
+	
+		Temporada t81 = new Temporada(1, s8, new ArrayList<>());
+		Temporada t82 = new Temporada(2, s8, new ArrayList<>());
+	
+		Capitulo c811 = new Capitulo("Érase una mudanza", "Los nuevos inquilinos llegan al edificio y se enfrentan a sus peculiares vecinos.", 1, t81);
+		Capitulo c812 = new Capitulo("Érase una boda", "El edificio entero se prepara para una boda, pero nada sale como estaba planeado.", 2, t81);
+		Capitulo c821 = new Capitulo("Érase una reforma", "Las reformas en el edificio causan caos y confusión entre los vecinos.", 1, t82);
+		Capitulo c822 = new Capitulo("Érase un reencuentro", "Un antiguo inquilino regresa y desata viejas tensiones y nuevas intrigas.", 2, t82);
+	
+		t81.getCapitulos().add(c811);
+		t81.getCapitulos().add(c812);
+		t82.getCapitulos().add(c821);
+		t82.getCapitulos().add(c822);
+	
+		s8.getTemporadas().add(t81);
+		s8.getTemporadas().add(t82);
+
+
 		sr.save(s1); // Guardar la serie "Los Serrano" en el repositorio
 		sr.save(s2); // Guardar la serie "Breaking Bad" en el repositorio
 		sr.save(s3); // Guardar la serie "Juego de Tronos" en el repositorio
@@ -244,6 +270,7 @@ public class AppFeeder implements CommandLineRunner {
 		sr.save(s5); // Guardar la serie "13 Reasons Why" en el repositorio
 		sr.save(s6); // Guardar la serie "Los Simpson" en el repositorio
 		sr.save(s7); // Guardar la serie "Lost" en el repositorio
+		sr.save(s8); // Guardar la serie "Aquí no hay quien viva" en el repositorio
 	}
 
 	private void addSeriesToPersonalSpace() {
