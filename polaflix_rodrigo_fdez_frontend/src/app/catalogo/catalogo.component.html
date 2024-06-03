@@ -1,18 +1,20 @@
-<div style="display: inline-block;">
-    <a *ngFor="let e of letrasYNumeros" (click)="seleccionarLetra(e)">{{ e }}</a>
+<div class="search-section">
+    <div class="alphabet-container">
+        <a *ngFor="let e of letrasYNumeros" (click)="buscarPorLetraNumero(e)"
+            [class.active]="e === letraNumeroActivo">{{ e }}</a>
+    </div>
+
+    <div id="search-component" class="search-container">
+        <label for="search-box" class="search-label"></label>
+        <input #searchBox id="search-box" class="search-input" placeholder="Nombre de la serie" />
+        <button (click)="buscar()" class="search-button">Buscar</button>
+    </div>
 </div>
 
-<div id="search-component" style="display: inline-block;">
-    <label for="search-box"></label>
-    <input #searchBox id="search-box" placeholder="Nombre de la serie" />
-    <button (click)="buscar()">Buscar</button>
-</div>
+<hr>
 
 <div>
-    <ul>
-        <li *ngFor="let s of serie">
-            {{ s.nombre }}
-            <button (click)="agregarSerie(s)">Agregar</button>
-        </li>
-    </ul>
+    <div *ngFor="let s of serie">
+        <app-catalogo-serie-item [serie]="s"></app-catalogo-serie-item>
+    </div>
 </div>

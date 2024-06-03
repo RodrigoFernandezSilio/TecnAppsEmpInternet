@@ -1,3 +1,56 @@
-a {
-    margin-right: 10px; /* Agregar espacio entre las letras */
-  }
+/* Contenedor principal */
+.search-section {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en línea o en columnas */
+  align-items: center; /* Centra verticalmente los elementos */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+/* Contenedor de alfabeto y números */
+.alphabet-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los enlaces se ajusten en línea o en columnas */
+  margin-right: 20px; /* Espacio entre el alfabeto y la caja de búsqueda */
+}
+
+/* Enlaces de alfabeto y números */
+.alphabet-container a {
+  margin: 0 5px;
+  cursor: pointer;
+  color: blue;
+  text-decoration: none; /* Sin subrayado por defecto */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.alphabet-container a:hover {
+  text-decoration: underline;
+}
+
+.alphabet-container a.active {
+  text-decoration: underline; /* Subrayado para el enlace activo */
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 100%; /* Establece la altura del contenedor principal al 100% */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+/* Campo de entrada */
+.search-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Botón de búsqueda */
+.search-button {
+  margin: 0px;
+}

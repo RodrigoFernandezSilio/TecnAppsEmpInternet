@@ -1,0 +1,25 @@
+.serie-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .serie-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .expand-icon {
+    margin-left: auto;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .serie-info p {
+    margin: 5px 0;
+  }
+  

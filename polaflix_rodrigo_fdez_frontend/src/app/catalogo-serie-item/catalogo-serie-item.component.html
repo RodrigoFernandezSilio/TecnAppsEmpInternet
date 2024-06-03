@@ -1,0 +1,26 @@
+<div class="serie-item">
+    <div class="serie-header">
+        <span>{{ serie.nombre }}</span>
+        <button (click)="agregarSerie(serie)" class="add-button">Agregar</button>
+        <button class="expand-icon" (click)="toggleExpand()">&#9658;</button>
+    </div>
+    <div class="serie-info" *ngIf="expanded">
+        <p>{{ serie.sinopsis }}</p>
+
+        <p>
+            <span>Creador/es: </span>
+            <span *ngFor="let creador of serie.creadores; let last = last">
+                {{ creador.nombre }} {{ creador.apellido1 }} {{ creador.apellido2 }}<ng-container
+                    *ngIf="!last">,</ng-container>
+            </span>
+        </p>
+
+        <p>
+            <span>Actor/es: </span>
+            <span *ngFor="let actor of serie.actores; let last = last">
+                {{ actor.nombre }} {{ actor.apellido1 }} {{ actor.apellido2 }}<ng-container
+                    *ngIf="!last">,</ng-container>
+            </span>
+        </p>
+    </div>
+</div>
