@@ -1,5 +1,5 @@
 <div class="serie-item">
-    <div class="serie-header">
+    <div class="serie-header" [class.destacado]="destacada">
         <span>{{ serie.nombre }}</span>
         <button (click)="agregarSerie(serie)" class="add-button">Agregar</button>
         <button class="expand-icon" (click)="toggleExpand()">&#9658;</button>

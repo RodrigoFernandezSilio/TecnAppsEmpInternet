@@ -12,6 +12,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 })
 export class CatalogoSerieItemComponent {
   @Input() serie!: SerieResumida; // Input para recibir la serie desde el componente padre
+  @Input() destacada!: boolean; // Input para recibir si la serie esta destacada desde el componente padre
 
   expanded: boolean = false;
 
