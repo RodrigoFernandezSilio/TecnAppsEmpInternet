@@ -2,6 +2,7 @@
 .search-section {
   display: flex;
   flex-wrap: wrap; /* Permite que los elementos se ajusten en línea o en columnas */
+  justify-content: space-between;
   align-items: center; /* Centra verticalmente los elementos */
   width: 100%; /* Ocupa todo el ancho disponible */
   box-sizing: border-box; /* Incluye padding y borde en el ancho total */
@@ -19,8 +20,6 @@
   margin: 0 5px;
   cursor: pointer;
   color: blue;
-  text-decoration: none; /* Sin subrayado por defecto */
-  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .alphabet-container a:hover {

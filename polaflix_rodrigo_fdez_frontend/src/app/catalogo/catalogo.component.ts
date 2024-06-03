@@ -28,7 +28,7 @@ export class CatalogoComponent {
   constructor(private serieService: SerieService, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.buscarPorLetraNumero('L')
+    this.buscarPorLetraNumero('A')
   }
 
   buscarPorLetraNumero(letraNumero: string) {

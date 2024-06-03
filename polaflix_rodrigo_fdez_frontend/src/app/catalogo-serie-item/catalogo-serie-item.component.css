@@ -10,7 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Estilo del nombre de la serie */
@@ -25,6 +26,7 @@ h3:hover {
 
 /* Estilo de la serie destacada */
 .destacado h3 {
+  padding: 4px; /* Agrega espacio alrededor del texto */
   background-color: yellow;
 }
 
@@ -34,17 +36,25 @@ h3:hover {
   background: none; /* Sin fondo */
   padding: 0px;
   margin: 0px;
+  margin-right: 4px;
   border: none; /* Sin borde */
   cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 }
 
 .add-button:hover {
-  filter: brightness(90%); /* Oscurece el botón al pasar el cursor sobre él */
+  text-decoration: underline;
 }
 
 .add-button:active {
-  filter: brightness(80%); /* Oscurece aún más el botón al hacer clic */
+  color: darkblue;
 }
+
+/* Estilo de la información de la serie */
+.serie-info div {
+  padding-left: 15px;
+  margin: 5px 0;
+}
+
 
 /* Estilo de la información de la serie */
 .serie-info p {
