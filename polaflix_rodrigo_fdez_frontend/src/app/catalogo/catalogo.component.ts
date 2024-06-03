@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { SerieResumida } from '../serie';
@@ -9,7 +9,7 @@ import { CatalogoSerieItemComponent } from '../catalogo-serie-item/catalogo-seri
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, NgFor, CatalogoSerieItemComponent],
+  imports: [RouterModule, RouterOutlet, NgFor, NgIf, CatalogoSerieItemComponent],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })
@@ -19,6 +19,7 @@ export class CatalogoComponent {
 
   series: SerieResumida[] = [];
   seriesDestacadas: boolean[] = [];
+  busquedaExitosa: boolean = true;
 
   letraNumeroActivo: string | null = null;
 
@@ -62,6 +63,7 @@ export class CatalogoComponent {
         this.series = serie;
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = primeraLetra;
+        this.busquedaExitosa = this.seriesDestacadas.includes(true);
       });
       this.letraNumeroActivo = primeraLetra;
     } else if (esNumero) {
@@ -69,6 +71,7 @@ export class CatalogoComponent {
         this.series = serie;
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = "0-9";
+        this.busquedaExitosa = this.seriesDestacadas.includes(true);
       });
     } else {
       console.log("No es ni letra ni número:", primeraLetra);

@@ -14,8 +14,13 @@
 <hr>
 
 <div>
+    <div *ngIf="busquedaExitosa">
     <div *ngFor="let s of series; let i = index">
         <app-catalogo-serie-item [serie]="s" [destacada]="seriesDestacadas[i]"></app-catalogo-serie-item>
+    </div>
+    </div>
+    <div *ngIf="!busquedaExitosa">
+        <h3>No se ha encontrado ninguna serie con nombre: {{ searchBox.value }}</h3>
     </div>
 </div>
 
