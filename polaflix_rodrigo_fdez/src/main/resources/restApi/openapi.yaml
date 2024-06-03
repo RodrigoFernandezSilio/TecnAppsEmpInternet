@@ -36,7 +36,7 @@ paths:
               format: int64
         required: true
       responses:
-        "200":
+        "204":
           description: Serie agregada al espacio personal del usuario
         "404":
           description: Usuario o serie no encontrados

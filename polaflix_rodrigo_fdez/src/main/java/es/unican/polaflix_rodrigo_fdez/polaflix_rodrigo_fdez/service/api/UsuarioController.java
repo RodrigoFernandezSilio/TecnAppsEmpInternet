@@ -132,10 +132,10 @@ public class UsuarioController {
     @Transactional
     @Operation(summary = "Agregar serie al espacio personal", description = "Agrega una serie al espacio personal del usuario")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Serie agregada al espacio personal del usuario", content = @Content),
+        @ApiResponse(responseCode = "204", description = "Serie agregada al espacio personal del usuario", content = @Content),
         @ApiResponse(responseCode = "404", description = "Usuario o serie no encontrados", content = @Content)
     })
-    public ResponseEntity<String> agregarSerieAEspacioPersonal(
+    public ResponseEntity<Void> agregarSerieAEspacioPersonal(
             @PathVariable("usuarioID") String usuarioID,
             @RequestBody Long serieID) {
 
@@ -149,7 +149,7 @@ public class UsuarioController {
 
                 usuario.agregarSerieEspacioPersonal(serie); // Llama al metodo agregarSerieEspacioPersonal
 
-                return ResponseEntity.ok("Serie agregada al espacio personal del usuario.");
+                return ResponseEntity.noContent().build();
             } else {
                 return ResponseEntity.notFound().build();
             }
