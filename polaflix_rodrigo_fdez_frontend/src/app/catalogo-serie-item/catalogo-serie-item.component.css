@@ -9,21 +9,32 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
-}
-
-.expand-icon {
-  margin-left: auto;
-  border: none;
-  background: none;
-  font-size: 16px;
-  cursor: pointer;
+  justify-content: space-between;
 }
 
 .serie-info p {
+  padding-left: 15px;
   margin: 5px 0;
 }
 
-/* Dentro de tu archivo CSS */
-.destacado span {
+.add-button {
+  color: blue; /* Color del texto */
+  background: none; /* Sin fondo */
+  padding: 0px;
+  margin: 0px;
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.add-button:hover {
+  filter: brightness(90%); /* Oscurece el botón al pasar el cursor sobre él */
+}
+
+.add-button:active {
+  filter: brightness(80%); /* Oscurece aún más el botón al hacer clic */
+}
+
+
+.destacado h3 {
   background-color: yellow;
 }

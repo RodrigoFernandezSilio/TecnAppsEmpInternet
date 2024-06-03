@@ -1,8 +1,7 @@
 <div class="serie-item">
     <div class="serie-header" [class.destacado]="destacada">
-        <span>{{ serie.nombre }}</span>
-        <button (click)="agregarSerie(serie)" class="add-button">Agregar</button>
-        <button class="expand-icon" (click)="toggleExpand()">&#9658;</button>
+        <h3 (click)="toggleExpand()">{{ serie.nombre }}</h3>
+        <span (click)="agregarSerie(serie)" class="add-button">Agregar</span>
     </div>
     <div class="serie-info" *ngIf="expanded">
         <p>{{ serie.sinopsis }}</p>
