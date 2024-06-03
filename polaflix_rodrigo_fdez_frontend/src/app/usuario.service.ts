@@ -11,7 +11,8 @@ export class UsuarioService {
 
   usuariosURL = 'http://localhost:8080/usuarios';
 
-  private nombreUsuario = "usuario1";
+  // usuarioID por defecto dado que la autenticacion no se ha implementado.
+  private usuarioID_porDefecto = "usuario1";
 
   // BehaviorSubject que mantiene el estado del usuario, inicialmente null, emite el ultimo valor a nuevos suscriptores.
   private usuarioSubject = new BehaviorSubject<UsuarioInicio | null>(null);
@@ -21,7 +22,8 @@ export class UsuarioService {
 
 
   constructor(private http: HttpClient) {
-    this.getUsuario(this.nombreUsuario).subscribe({
+    // Obtener usuario por defecto
+    this.getUsuario(this.usuarioID_porDefecto).subscribe({
       next: (usuario) => {
         this.usuarioSubject.next(usuario);
         console.log(`Usuario inicial cargado`);
@@ -32,21 +34,26 @@ export class UsuarioService {
     });
   }
 
-  /** GET usuario by id. Will 404 if id not found */
+  /** Obtiene un usuario por su ID. Devuelve un error 404 si no se encuentra un usuario con ese ID */
   getUsuario(usuarioID: string): Observable<UsuarioInicio> {
-    console.log(`GET usuario con id=${usuarioID}`);
+    console.log(`Obteniendo usuario...`);
+
     const url = `${this.usuariosURL}/${usuarioID}`;
+
     return this.http.get<UsuarioInicio>(url).pipe(
-      tap(_ => console.log(`fetched usuario id=${usuarioID}`)),
+      tap(_ => console.log(`Usuario ${usuarioID} obtenido`)),
       catchError(this.handleError<UsuarioInicio>(`getUsuario id=${usuarioID}`))
     );
   }
 
-
+  /** Agrega una serie al espacio personal del usuario.
+   * Devuelve un error 404 si no encuentra un usuario con ese ID o una serie con ese ID. */
   agregarSerieAEspacioPersonal(serieID: number): Observable<string> {
-    const usuarioID = this.nombreUsuario;
     console.log('Añadiendo serie al espacio personal...');
+
+    const usuarioID = this.usuarioID_porDefecto;
     const url = `${this.usuariosURL}/${usuarioID}/series`;
+
     return this.http.patch<string>(url, serieID).pipe(
       tap(_ => {
         console.log(`Serie ${serieID} agregada al espacio personal del usuario ${usuarioID}`);
@@ -54,14 +61,14 @@ export class UsuarioService {
         this.getUsuario(usuarioID).subscribe({
           next: (usuario) => {
             this.usuarioSubject.next(usuario);
-            console.log(`Usuario inicial cargado`);
+            console.log(`Usuario cargado`);
           },
           error: (err) => {
-            console.error(`Error al cargar el usuario inicial: ${err}`);
+            console.error(`Error al cargar el usuario: ${err}`);
           }
         });
       }),
-      catchError(this.handleError<string>(`agregarSerieAEspacioPersonal`))
+      catchError(this.handleError<string>(`agregarSerieAEspacioPersonal usuarioID=${usuarioID} serieID=${serieID}`))
     );
   }
 

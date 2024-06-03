@@ -35,7 +35,6 @@ export class CatalogoComponent {
   }
 
   agregarSerie(serie: SerieResumida) {
-    console.log("Botón pulsado");
     this.usuarioService.agregarSerieAEspacioPersonal(serie.id).subscribe();
   }
 
