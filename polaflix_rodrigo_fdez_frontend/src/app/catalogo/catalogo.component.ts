@@ -38,6 +38,8 @@ export class CatalogoComponent {
       this.serieService.obtenerSeries(letraNumero).subscribe(series => this.series = series);
     }
     this.letraNumeroActivo = letraNumero;
+    this.seriesDestacadas = this.seriesDestacadas.map(v => false);
+    this.busquedaExitosa = true;
   }
 
   agregarSerie(serie: SerieResumida) {
@@ -59,16 +61,15 @@ export class CatalogoComponent {
     const esNumero = /^[0-9]$/.test(primeraLetra);
 
     if (esLetra) {
-      this.serieService.obtenerSeries(primeraLetra).subscribe(serie => {
-        this.series = serie;
+      this.serieService.obtenerSeries(primeraLetra).subscribe(series => {
+        this.series = series;
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = primeraLetra;
         this.busquedaExitosa = this.seriesDestacadas.includes(true);
       });
-      this.letraNumeroActivo = primeraLetra;
     } else if (esNumero) {
-      this.serieService.obtenerSeriesQueEmpiezanPorNumero().subscribe(serie => {
-        this.series = serie;
+      this.serieService.obtenerSeriesQueEmpiezanPorNumero().subscribe(series => {
+        this.series = series;
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = "0-9";
         this.busquedaExitosa = this.seriesDestacadas.includes(true);
