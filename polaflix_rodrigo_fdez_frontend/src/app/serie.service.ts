@@ -14,12 +14,11 @@ export class SerieService {
     private http: HttpClient
   ) { }
 
-  obtenerSeries(letraInicial?: string, nombre?: string): Observable<SerieResumida[]> {
+  obtenerSeries(letraInicial: string, nombre?: string): Observable<SerieResumida[]> {
     let url = this.seriesURL;
+    url += `?letraInicial=${letraInicial}`;
     if (nombre) {
       url += `?nombre=${nombre}`;
-    } else if (letraInicial) {
-      url += `?letraInicial=${letraInicial}`;
     }
     return this.http.get<SerieResumida[]>(url).pipe(
       tap(_ => console.log('Series encontradas')),
@@ -35,11 +34,6 @@ export class SerieService {
     );
   }
 
-  /** Log a HeroService message with the MessageService */
-  private log(message: string) {
-    console.log(`UsuarioService: ${message}`);
-    //this.messageService.add(`HeroService: ${message}`);
-  }
 
   /**
    * Handle Http operation that failed.
@@ -51,11 +45,9 @@ export class SerieService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
