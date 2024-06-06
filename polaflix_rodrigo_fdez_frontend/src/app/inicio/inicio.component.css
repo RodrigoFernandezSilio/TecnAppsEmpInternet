@@ -1,7 +1,8 @@
 /* Estilo para los contenedores de las cajas */
 .series-container {
     border: 1px solid #ccc; /* Borde gris para las cajas */
-    padding: 10px; /* Espaciado interno */
+    border-radius: 5px;
+    padding: 6px 10px; /* Espaciado interno */
     margin-bottom: 20px; /* Margen inferior entre cajas */
   }
   
@@ -21,6 +22,11 @@
   
   /* Estilo para los elementos de la lista de series */
   .series-list-item {
-    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+    margin: 4px 0px; /* Espacio entre elementos de la lista */
+    cursor: pointer;
   }
-  
+
+.series-list-item:hover {
+  text-decoration: underline; /* Subraya el texto */
+  text-decoration-color: black; /* Color del subrayado en negro */
+}
