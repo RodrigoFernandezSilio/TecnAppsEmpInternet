@@ -1,7 +1,8 @@
 <div class="serie-item">
     <div class="serie-header" [class.destacado]="destacada">
-        <h3 (click)="toggleExpand()">{{ serie.nombre }}</h3>
-        <span (click)="agregarSerie(serie)" class="add-button">Agregar</span>
+        <p class="serie-name" (click)="toggleExpand()">{{ serie.nombre }}</p>
+        <span (click)="agregarSerie(serie)" class="add-button" [class.disabled]="serieAgregada">{{ serieAgregada ?
+            'Agregada' : 'Agregar' }}</span>
     </div>
     <div class="serie-info" *ngIf="expanded">
         <p>{{ serie.sinopsis }}</p>
@@ -9,16 +10,16 @@
         <p>
             <span>Creador/es: </span>
             <span *ngFor="let creador of serie.creadores; let last = last">
-                {{ creador.nombre }} {{ creador.apellido1 }} {{ creador.apellido2 }}<ng-container
-                    *ngIf="!last">,</ng-container>
+                {{ creador.nombre }} {{ creador.apellido1 }}<ng-container *ngIf="creador.apellido2"> {{
+                    creador.apellido2 }}</ng-container><ng-container *ngIf="!last">,</ng-container>
             </span>
         </p>
 
         <p>
             <span>Actor/es: </span>
             <span *ngFor="let actor of serie.actores; let last = last">
-                {{ actor.nombre }} {{ actor.apellido1 }} {{ actor.apellido2 }}<ng-container
-                    *ngIf="!last">,</ng-container>
+                {{ actor.nombre }} {{ actor.apellido1 }}<ng-container *ngIf="actor.apellido2"> {{ actor.apellido2
+                    }}</ng-container><ng-container *ngIf="!last">,</ng-container>
             </span>
         </p>
     </div>

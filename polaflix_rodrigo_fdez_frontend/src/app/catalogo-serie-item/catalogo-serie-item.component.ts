@@ -14,6 +14,8 @@ export class CatalogoSerieItemComponent {
   @Input() serie!: SerieResumida; // Input para recibir la serie desde el componente padre
   @Input() destacada!: boolean; // Input para recibir si la serie esta destacada desde el componente padre
 
+  serieAgregada: boolean = false;
+
   expanded: boolean = false;
 
   constructor(private usuarioService: UsuarioService) { }
@@ -26,6 +28,7 @@ export class CatalogoSerieItemComponent {
 
   agregarSerie(serie: SerieResumida) {
     this.usuarioService.agregarSerieAEspacioPersonal(serie.id).subscribe();
+    this.serieAgregada = true;
   }
 }
 

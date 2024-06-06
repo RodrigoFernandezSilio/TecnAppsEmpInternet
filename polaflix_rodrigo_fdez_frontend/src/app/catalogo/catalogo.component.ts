@@ -33,9 +33,15 @@ export class CatalogoComponent {
 
   buscarPorLetraNumero(letraNumero: string) {
     if (letraNumero.match(/[0-9]/)) {
-      this.serieService.obtenerSeriesQueEmpiezanPorNumero().subscribe(series => this.series = series);
+      this.serieService.obtenerSeriesQueEmpiezanPorNumero().subscribe(series => {
+        this.series = series;
+        this.ordenarSeriesAlfabeticamente();
+      });
     } else {
-      this.serieService.obtenerSeries(letraNumero).subscribe(series => this.series = series);
+      this.serieService.obtenerSeries(letraNumero).subscribe(series => {
+        this.series = series;
+        this.ordenarSeriesAlfabeticamente();
+      });
     }
     this.letraNumeroActivo = letraNumero;
     this.seriesDestacadas = this.seriesDestacadas.map(v => false);
@@ -63,6 +69,7 @@ export class CatalogoComponent {
     if (esLetra) {
       this.serieService.obtenerSeries(primeraLetra).subscribe(series => {
         this.series = series;
+        this.ordenarSeriesAlfabeticamente();
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = primeraLetra;
         this.busquedaExitosa = this.seriesDestacadas.includes(true);
@@ -70,6 +77,7 @@ export class CatalogoComponent {
     } else if (esNumero) {
       this.serieService.obtenerSeriesQueEmpiezanPorNumero().subscribe(series => {
         this.series = series;
+        this.ordenarSeriesAlfabeticamente();
         this.seriesDestacadas = this.series.map(serie => serie.nombre === nombreSerie);
         this.letraNumeroActivo = "0-9";
         this.busquedaExitosa = this.seriesDestacadas.includes(true);
@@ -80,10 +88,10 @@ export class CatalogoComponent {
     }
   }
 
-
-  verMas(serie: SerieResumida) {
-
+  // Función para ordenar this.series alfabéticamente por el nombre de la serie
+  ordenarSeriesAlfabeticamente() {
+    this.series.sort((a, b) => {
+      return a.nombre.localeCompare(b.nombre);
+    });
   }
-
-
 }
