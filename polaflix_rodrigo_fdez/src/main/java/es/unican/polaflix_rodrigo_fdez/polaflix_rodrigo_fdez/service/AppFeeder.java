@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,7 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Serie;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Temporada;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.TipoUsuario;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Usuario;
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.PersonaRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.SerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.UsuarioRepository;
 
@@ -27,6 +29,8 @@ public class AppFeeder implements CommandLineRunner {
 	protected UsuarioRepository ur;
 	@Autowired
 	protected SerieRepository sr;
+	@Autowired
+	protected PersonaRepository pr;
 
 	@Override
 	@Transactional
@@ -56,15 +60,16 @@ public class AppFeeder implements CommandLineRunner {
 	}
 
 	private void feedSeries() {
+		CategoriaSerie estandar = new CategoriaSerie("ESTANDAR", 0.50f);		
+		CategoriaSerie silver = new CategoriaSerie("SILVER", 0.75f);
+		CategoriaSerie gold = new CategoriaSerie("GOLD", 1.50f);
+
 		/* Los Serrano */
 		Persona creador1 = new Persona("Daniel", "Ecija", "Bernal");
 		Persona creador2 = new Persona("Alex", "Pina", "Calafi");
 		Persona actor1 = new Persona("Antonio", "Fernández", "Resines");
 		Persona actor2 = new Persona("Belen", "Rueda", "García");
-
-		CategoriaSerie estandar = new CategoriaSerie("ESTANDAR", 0.50f);		
-		CategoriaSerie silver = new CategoriaSerie("SILVER", 0.75f);
-		CategoriaSerie gold = new CategoriaSerie("GOLD", 1.50f);
+		guardarPersona(Arrays.asList(creador1, creador2, actor1, actor2));
 
 		Serie s1 = new Serie("Los Serrano", "Comedia familiar sobre una familia peculiar", estandar,
 			new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -90,6 +95,8 @@ public class AppFeeder implements CommandLineRunner {
 		creador1 = new Persona("Vince", "Gilligan", "");
 		actor1 = new Persona("Bryan", "Cranston", "");
 		actor2 = new Persona("Aaron", "Paul", "");
+		guardarPersona(Arrays.asList(creador1, actor1, actor2));
+		
 
 		Serie s2 = new Serie("Breaking Bad", "Un profesor de quimica se convierte en fabricante de metanfetamina",
 			silver, new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -116,6 +123,7 @@ public class AppFeeder implements CommandLineRunner {
 		creador2 = new Persona("Daniel Brett", "Weiss", "");
 		actor1 = new Persona("Emilia", "Clarke", "");
 		actor2 = new Persona("Kit", "Harington", "");
+		guardarPersona(Arrays.asList(creador1, creador2, actor1, actor2));
 
 		Serie s3 = new Serie("Juego de Tronos", "Drama y fantasia medieval", gold,
 			new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -140,6 +148,7 @@ public class AppFeeder implements CommandLineRunner {
 		/* 24 */
 		creador1 = new Persona("Joel", "Surnow", "");
 		actor1 = new Persona("Kiefer", "Sutherland", "");
+		guardarPersona(Arrays.asList(creador1, actor1));
 
 		Serie s4 = new Serie("24", "Thriller de acción y drama político", estandar,
 			new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1)), new ArrayList<>());
@@ -165,6 +174,7 @@ public class AppFeeder implements CommandLineRunner {
 		creador1 = new Persona("Brian", "Yorkey", "");
 		actor1 = new Persona("Dylan", "Minnette", "");
 		actor2 = new Persona("Katherine", "Langford", "");
+		guardarPersona(Arrays.asList(creador1, actor1, actor2));
 
 		Serie s5 = new Serie("13 Reasons Why", "Un adolescente recibe una serie de cintas de una compañera de clase que se suicidó.", estandar,
         new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -190,6 +200,7 @@ public class AppFeeder implements CommandLineRunner {
 		creador1 = new Persona("Matt", "Groening", "");
 		actor1 = new Persona("Dan", "Castellaneta", "");
 		actor2 = new Persona("Nancy", "Cartwright", "");
+		guardarPersona(Arrays.asList(creador1, actor1, actor2));
 	
 		Serie s6 = new Serie("Los Simpson", "Una familia disfuncional vive en una ciudad ficticia llamada Springfield.", 
 			silver, new HashSet<>(Arrays.asList(creador1)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -216,6 +227,7 @@ public class AppFeeder implements CommandLineRunner {
 		creador2 = new Persona("Damon", "Lindelof", "");
 		actor1 = new Persona("Matthew", "Fox", "");
 		actor2 = new Persona("Evangeline", "Lilly", "");
+		guardarPersona(Arrays.asList(creador1, creador2, actor1, actor2));
 	
 		Serie s7 = new Serie("Lost", "Un grupo de supervivientes de un accidente aéreo están varados en una misteriosa isla tropical.", 
 			silver, new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -242,6 +254,7 @@ public class AppFeeder implements CommandLineRunner {
 		creador2 = new Persona("Alberto", "Caballero", "");
 		actor1 = new Persona("José", "Luis", "Gil");
 		actor2 = new Persona("Fernando", "Tejero", "");
+		guardarPersona(Arrays.asList(creador1, creador2, actor1, actor2));
 	
 		Serie s8 = new Serie("Aquí no hay quien viva", "Comedia sobre la vida en una comunidad de vecinos en un edificio del centro de Madrid.", 
 			estandar, new HashSet<>(Arrays.asList(creador1, creador2)), new HashSet<>(Arrays.asList(actor1, actor2)), new ArrayList<>());
@@ -305,5 +318,11 @@ public class AppFeeder implements CommandLineRunner {
 
 		// Para comorbar que al ver el ultimo capitulo de una serie esta pasa a terminadas
 		u1.anotarCapituloComoReproducido(c222);
+	}
+
+	private void guardarPersona(List<Persona> listaPersona) {
+		for (Persona persona: listaPersona) {
+			pr.save(persona);
+		}
 	}
 }

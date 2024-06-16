@@ -50,12 +50,12 @@ public class Serie {
     private CategoriaSerie categoriaSerie;
 
     @NonNull
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JsonView({Views.SerieResumen.class})
     private Set<Persona> creadores;
 
     @NonNull
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JsonView({Views.SerieResumen.class})
     private Set<Persona> actores;
 
