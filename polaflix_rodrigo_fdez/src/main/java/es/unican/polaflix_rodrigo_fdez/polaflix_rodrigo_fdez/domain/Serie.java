@@ -45,7 +45,7 @@ public class Serie {
     private String sinopsis;
 
     @NonNull
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JsonView({Views.UsuarioSerieDTO_Vista.class})
     private CategoriaSerie categoriaSerie;
 

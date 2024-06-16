@@ -18,6 +18,7 @@ import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Serie;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Temporada;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.TipoUsuario;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.domain.Usuario;
+import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.CategoriaSerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.PersonaRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.SerieRepository;
 import es.unican.polaflix_rodrigo_fdez.polaflix_rodrigo_fdez.repositories.UsuarioRepository;
@@ -31,6 +32,8 @@ public class AppFeeder implements CommandLineRunner {
 	protected SerieRepository sr;
 	@Autowired
 	protected PersonaRepository pr;
+	@Autowired
+	protected CategoriaSerieRepository csr;
 
 	@Override
 	@Transactional
@@ -63,6 +66,7 @@ public class AppFeeder implements CommandLineRunner {
 		CategoriaSerie estandar = new CategoriaSerie("ESTANDAR", 0.50f);		
 		CategoriaSerie silver = new CategoriaSerie("SILVER", 0.75f);
 		CategoriaSerie gold = new CategoriaSerie("GOLD", 1.50f);
+		csr.save(estandar); csr.save(silver); csr.save(gold);
 
 		/* Los Serrano */
 		Persona creador1 = new Persona("Daniel", "Ecija", "Bernal");
