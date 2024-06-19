@@ -15,31 +15,6 @@ tags:
     \ como la obtención de detalles de usuario y la gestión de sus datos relacionados\
     \ con series y visualización de contenido."
 paths:
-  /usuarios/{usuarioID}/series:
-    patch:
-      tags:
-      - usuario-controller
-      summary: Agregar serie al espacio personal
-      description: Agrega una serie al espacio personal del usuario
-      operationId: agregarSerieAEspacioPersonal
-      parameters:
-      - name: usuarioID
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: integer
-              format: int64
-        required: true
-      responses:
-        "204":
-          description: Serie agregada al espacio personal del usuario
-        "404":
-          description: Usuario o serie no encontrados
   /usuarios/{usuarioID}/series/{serieID}:
     get:
       tags:
@@ -69,7 +44,31 @@ paths:
                 $ref: '#/components/schemas/UsuarioSerieDTO_UsuarioSerieDTO_Vista'
         "404":
           description: Usuario o serie no encontrados
-    patch:
+    put:
+      tags:
+      - usuario-controller
+      summary: Agregar serie al espacio personal
+      description: Agrega una serie al espacio personal del usuario
+      operationId: agregarSerieAEspacioPersonal
+      parameters:
+      - name: usuarioID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: serieID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Serie agregada al espacio personal del usuario
+        "404":
+          description: Usuario o serie no encontrados
+  /usuarios/{usuarioID}/series/{serieID}/temporadas/{numTemporada}/capitulos/{numCapitulo}:
+    put:
       tags:
       - usuario-controller
       summary: Anotar capítulo como reproducido
@@ -87,12 +86,18 @@ paths:
         schema:
           type: integer
           format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TemporadaCapituloDTO'
+      - name: numTemporada
+        in: path
         required: true
+        schema:
+          type: integer
+          format: int32
+      - name: numCapitulo
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: Capítulo anotado como reproducido
@@ -147,14 +152,14 @@ paths:
           type: integer
           format: int32
       responses:
+        "404":
+          description: Usuario no encontrado
         "200":
           description: Factura encontrada
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Factura_Factura_Vista'
-        "404":
-          description: Usuario no encontrado
   /series:
     get:
       tags:

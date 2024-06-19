@@ -22,45 +22,6 @@
     }
   ],
   "paths": {
-    "/usuarios/{usuarioID}/series": {
-      "patch": {
-        "tags": [
-          "usuario-controller"
-        ],
-        "summary": "Agregar serie al espacio personal",
-        "description": "Agrega una serie al espacio personal del usuario",
-        "operationId": "agregarSerieAEspacioPersonal",
-        "parameters": [
-          {
-            "name": "usuarioID",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "Serie agregada al espacio personal del usuario"
-          },
-          "404": {
-            "description": "Usuario o serie no encontrados"
-          }
-        }
-      }
-    },
     "/usuarios/{usuarioID}/series/{serieID}": {
       "get": {
         "tags": [
@@ -104,7 +65,44 @@
           }
         }
       },
-      "patch": {
+      "put": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "summary": "Agregar serie al espacio personal",
+        "description": "Agrega una serie al espacio personal del usuario",
+        "operationId": "agregarSerieAEspacioPersonal",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serieID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Serie agregada al espacio personal del usuario"
+          },
+          "404": {
+            "description": "Usuario o serie no encontrados"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioID}/series/{serieID}/temporadas/{numTemporada}/capitulos/{numCapitulo}": {
+      "put": {
         "tags": [
           "usuario-controller"
         ],
@@ -128,18 +126,26 @@
               "type": "integer",
               "format": "int64"
             }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TemporadaCapituloDTO"
-              }
+          },
+          {
+            "name": "numTemporada",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           },
-          "required": true
-        },
+          {
+            "name": "numCapitulo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Capítulo anotado como reproducido"
